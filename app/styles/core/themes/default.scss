@@ -1,0 +1,16 @@
+// 主题风格定制
+:global {
+    // 通用编辑按钮
+    .editBtn {
+        color: $theme-highlight-1 !important;
+    }
+
+    // 通用删除按钮
+    .deleteBtn {
+        color: $theme-text-delete !important;
+        &:hover {
+            color: $theme-text-delete !important;
+        }
+    }
+}
+

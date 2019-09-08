@@ -1,0 +1,318 @@
+// Name                   variables
+//
+// Description:  Define all variables (存放除颜色外基本变量)
+// ===============================================================
+@import "tools/colors";
+
+$ns: "qx-"; // Quantex UI 命名空间
+
+// global spacing
+// =================================================
+//$spacer: 20px !default;
+$spacer: 10px !default;
+
+// Reassign color vars to semantic color scheme
+//$brand-primary:             $blue-6 !default;
+$brand-primary: #149AFA;
+$brand-success: #00AB27;
+// $brand-success: lightgreen;
+$brand-info: #149AFA;
+$brand-warning: $orange-6 !default;
+$brand-danger: #fd5453;
+$brand-muted: $grey-6 !default;
+
+$td-red: #FFB7B7; // 表格专用背景色 - 浅红
+$td-yellow: #FFEBAC; // 表格专用背景色 - 黄色
+$td-green: #9EECC9; // 表格专用背景色 - 绿色
+$td-blue: #8EE5FF; // 表格专用背景色 - 蓝色
+$td-pink: #FFC6E5; // 表格专用背景色 - 粉红
+
+$td-active-red: #E7B0B7; // 表格专用背景色 - 浅红 - focus状态
+$td-active-yellow: #E7E1A8; // 表格专用背景色 - 黄色 - focus状态
+$td-active-green: #8CE2C8; // 表格专用背景色 - 绿色 - focus状态
+$td-active-blue: #7CDBFF; // 表格专用背景色 - 蓝色 - focus状态
+$td-active-pink: #E8BCE5; // 表格专用背景色 - 粉红 - focus状态
+
+$td-hover-red: #FBD0D0; // 表格专用背景色 - 浅红 - hover状态
+$td-hover-yellow: #FBF0CA; // 表格专用背景色 - 黄色 - hover状态
+$td-hover-green: #BEF1DB; // 表格专用背景色 - 绿色 - hover状态
+$td-hover-blue: #B5ECFE; // 表格专用背景色 - 蓝色 - hover状态
+$td-hover-pink: #FBD8EE; // 表格专用背景色 - 粉红 - hover状态
+
+//Body
+//
+//Settings for the `<body>` element.
+
+$body-bg: #fff;
+//$body-bg:       $grey-2 !default;
+//$body-color:    $gray-dark !default;
+$global-spacer: $spacer;
+//$page-content-min-width: 1100px;  // 主页内容最小宽度(左侧菜单除外)
+$page-content-min-width: 1020px; // 主页内容最小宽度(1280 -左侧菜单220px - padding 20*2)
+
+// Links
+//
+// Style anchor elements.
+
+$link-color: $brand-primary !default;
+$link-decoration: none !default;
+$link-hover-color: darken($link-color, 15%) !default;
+$link-hover-decoration: underline !default;
+
+// 背景色
+$header-bg: #F5F5F5; // header背景色
+$sub-header-bg: #FAFAFA; // 次级header背景色
+$bg-gray-light: #F7F7F7; // 背景色 - 浅灰
+
+// 字体色
+$title-color: #404040; // 标题类颜色
+$text-color: #666; // 默认字体色
+$text-color-secondary: #808080; // 次要字体色
+$text-color-light: #999; // 浅色字体色，比如左树右内容里左树的文字
+$text-color-lighter: #B3B3B3; // 浅色提示字体色，比如「暂无数据」之类
+$text-disabled: #DDD; // disabled 字体色
+
+// zIndex list
+$zIndex-layout-footer: 1; // 页面footer z-index
+$zIndex-layout-menu: 2; // 左侧菜单z-index
+$zIndex-sidebar: 1050; // 侧滑栏
+$zIndex-modal: 1050; // 弹出框
+$zIndex-drag: 1060; // 可拖拽元素
+$zIndex-context-menu: 1070; // 右键菜单
+$zIndex-alert: 1080; // 提示框
+$zIndex-tooltip: 1081; // tooltip提示
+$zIndex-lock: 1090; // 锁屏
+$zIndex-popover: 1095; // 气泡下拉框
+$zIndex-loading: 1100; // 请求加载框
+
+// SideBar
+//
+// variables for sidebar
+$sidebar-spacer: $spacer;
+
+// Forms
+$input-bg: #fff !default;
+$input-bg-disabled: #F5F5F5;
+$input-bg-readonly: #F5F5F5; // input - 背景色 - 只读状态
+
+$input-color: rgba(0, 0, 0, 0.65) !default;
+$addon-bg: #F5F5F5; // input - addon背景色
+$input-height: 28px; // input - 高度
+$input-border-radius: 2px !default;
+
+$upload-drag-bg: #FAFAFA; // 拖拽上传 - 背景色
+
+// layout布局
+$layout-spacer: 20px; // 整体布局主要间距
+$layout-spacer-sm: 12px; // 1280及以下的布局主要间距
+
+$layout-header-height: 44px; // 顶部导航 - 高度
+$layout-footer-height: 28px; // 底部导航 - 高度
+$layout-tablist-height: 28px; // 页面导航 - 高度
+
+$layout-nav-link-color: #404040; // 顶部导航 - 字体颜色 - 正常状态
+$layout-nav-link-hover-color: $brand-primary; // 顶部导航 - 字体颜色 - hover状态
+
+$layout-asider-width: 220px; // 左侧菜单 - 宽度 - 正常状态 - 大屏
+$layout-asider-width-sm: 180px; // 左侧菜单 - 宽度 - 正常状态 - 小屏
+//$layout-aside-width-collapse:    32px;                                    // 左侧菜单 - 宽度 - 折叠状态
+$layout-aside-width-collapse: 0; // 左侧菜单 - 宽度 - 折叠状态
+$layout-asider-bg-color: #242D33; // 左侧菜单 - 整体背景色
+$layout-menu-bg-active: #3A4247; // 左侧菜单 - 一级菜单背景色 - active状态
+$layout-menu-height: 50px; // 左侧菜单 - 一级菜单高度
+$layout-submenu-height: 36px; // 左侧菜单 - 子菜单高度
+$layout-menu-font-size: 13px; // 左侧菜单 - 字体大小
+$layout-menu-color: #919699; // 左侧菜单 - 字体颜色 - 正常状态
+$layout-menu-hover-color: #fff; // 左侧菜单 - 字体颜色 - hover状态
+$layout-menu-text-indent: 20px; // 左侧菜单 - 缩进 - 大屏
+
+$layout-line-color: #EBEBEB; // 常用的线颜色
+$layout-title-color: #404040; // 常用的标题颜色
+
+$multi-level-tabs-menu-bg: #F5F5F5; // 多级tabs变成的菜单的背景色
+
+// 页内折叠面板
+$panel-header-bg: #F5F5F5; // 表格panel的header - 背景色
+$panel-header-height: 40px; // 表格panel的header - 高度
+$panel-header-color: #404040; // 表格panel的header - 字体色
+
+$main-menu-zIndex: 10;
+
+// 表格
+$table-header-bg: #FAFAFA; // 表格 - 表头 - 颜色
+$table-strip-bg: #FAFAFA; // 表格 - 间隔背景色
+$table-tr-hover-bg: #F5F8FA; // 表格 - hover行背景色
+$table-tr-focus-bg: #E7F4FE; // 表格 - 选中行背景色
+$table-td-padding-y: 6px; // 表格 - 单元格 - 上下padding
+$table-td-padding-x: 12px; // 表格 - 单元格 - 左右padding
+$table-header-color: #404040; // 表格 - 表头 - 字体色
+$sub-table-bg: #F6F6F6; // 表格 - 子表格 - 背景色
+$sub-table-margin-left: 66px; // 表格 - 子表格 - 左边margin
+
+// 动画
+$ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+$ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+// 下拉菜单
+$dropdown-menu-item-padding-y: 2px; // 下拉菜单- 选项 - 上下padding
+$dropdown-menu-item-padding-x: 7px; // 下拉菜单- 选项 - 左右padding
+
+// 响应式breakpoint
+$screen-md-max: 1279px; // TODO: antd2.0版本没有xxl，暂时调整，以后改回来
+$screen-lg: 1280px; // TODO: antd2.0版本没有xxl，暂时调整，以后改回来
+$screen-lg-min: $screen-lg; // TODO: antd2.0版本没有xxl，暂时调整，以后改回来
+$screen-lg-max: 1599px; // TODO: antd2.0版本没有xxl，暂时调整，以后改回来
+$screen-xl: 1600px; // TODO: antd2.0版本没有xxl，暂时调整，以后改回来
+$screen-xl-min: 1600px; // TODO: antd2.0版本没有xxl，暂时调整，以后改回来
+
+// 滚动条
+$scrollbar-width: 10px; // 滚动条宽度
+$scrollbar-border-radius: 0; // 滚动条圆角
+$scrollbar-border-radius-hover: 10px; // 滚动条圆角
+$scrollbar-thumb-bg: #DDD; // 滚动条前景色 (原#fafafa)
+$scrollbar-thumb-bg-scroll: #DDD; // 滚动条前景色
+$scrollbar-thumb-bg-hover: #CBCBCB; // 滚动条前景色 - hover时候
+
+// 表单
+$form-item-margin-bottom: 20px; // 表单项 - 下边距
+$form-item-label-color: rgba(0, 0, 0, .85) !default; // 表单项 - label 文字颜色
+
+/* ------------------------------------ 分割线 --------------------------------------- */
+/**
+    分割线以上代码为ims定义变量，需要保留，兼容通用ui组件
+ */
+
+/* --------------------- 通用数值 ------------------------ */
+//padding
+$pad-small: 8px;
+$pad-default: 16px;
+$pad-large: 24px;
+
+$pad-xs: 8px;
+$pad-sm: 12px;
+$pad-md: 16px;
+$pad-lg: 24px;
+
+//height
+$height-small: 28px;
+$height-default: 32px;
+$height-large: 48px;
+
+$zIndex-context-menu: 1049;
+
+$font-size-large: 16px;
+$font-size-default: 14px;
+$font-size-small: 12px;
+
+$radius: 4px;
+
+// 暗色 通用字体颜色
+$theme-text-disabled: rgba(255, 255, 255, .45); // 禁止操作文字颜色
+$theme-text-dark: rgba(255, 255, 255, 0.65); // 文字颜色
+$theme-text-title: rgba(255, 255, 255, .85); // 标题文字颜色
+$theme-text-light: #fff;
+$theme-text-delete: #F04134;
+
+/* ----------------------- 黑暗主题 DARK START ----------------------- */
+/**
+ * 黑色主题
+ */
+/* ---------- 通用主题色 ---------- */
+// 主题色
+$theme-background_2d: #2d2d2d; // 内容，头部，顶部导航，左侧栏2
+$theme-background_38: #383838; // 左侧栏1
+$theme-background_22: #222; // 左侧栏1，body
+
+$theme-background_55: #555;
+$theme-background_44: #444;
+$theme-background_33: #333;
+
+// 通用border色值
+$theme-border_4f: #4f4f4f;
+$theme-highlight-1: #108EE9; // 高亮色值
+
+/* ---------- 组件色值 ---------- */
+$theme-popup-bg: #5c5c5c;
+
+//form组件
+$theme-input-bg: #282828;
+$theme-input-border: #555;
+$theme-input-bg-disabled: #f7f7f7 !default;
+$theme-input-bg-readonly: #f0f0f0 !default;
+
+$theme-placeholder-color: rgba(255, 255, 255, .25);
+
+// Select
+$theme-select-bg: #282828 !default;
+$theme-select-selected: rgba(40, 40, 40, 1) !default;
+$theme-select-color: rgba(255, 255, 255, 0.85) !default;
+
+//Table
+$theme-table-color-odd: #222;
+
+//Tab
+$theme-tab-active-bg: rgba(64, 169, 255, .2);
+
+// Cascader
+$theme-cascader-menu-bg: #555;
+$theme-cascader-menu-item-hover: #282828;
+$theme-cascader-text-color: rgba(255, 255, 255, .65);
+
+/* ----------------------- 黑暗主题 DARK END ----------------------- */
+
+$placeholder-color: rgba(250, 239, 239, 0.25);
+
+/* ----------------------- 高亮主题 START ----------------------- */
+/**
+ * 白色主题
+ */
+/* ---------- 通用主题色 ---------- */
+// 主题色
+$light-background-body: #E6E9EB; // body
+$light-background_cont: #fff; // 内容，头部，顶部导航
+$light-background-menu_left: #242D33; // 左侧栏1
+
+$light-text-color_1: #666;
+$light-text-color_2: #333;
+
+$light-border-color: #ddd;
+
+$light-background-active: rgba(16, 142, 233, 0.2); // tab，table选中高亮
+
+//Tab
+$light-background-tab_active: #E5F0F9;
+
+/* ----------------------- 高亮主题 END ----------------------- */
+
+/* ----------------------- 深蓝主题 DARK2 START ----------------------- */
+/**
+ * 深蓝色主题
+ */
+// 背景色
+$darkblue-background_1: #152337; // 内容，头部，左侧栏
+$darkblue-background_2: #0F1726; // body
+$darkblue-background_3: #1e252f; // 表格hover高亮，active高亮
+$darkblue-background_4: #253955; // 表头
+$darkblue-background_5: #394454;
+$darkblue-background_5: #434F5E; // 顶部导航
+$darkblue-background_6: #131C2D; // 左侧二级导航
+$darkblue-background_modal: #333f4f; // 弹层背景
+
+// 通用border-color
+$darkblue-border_1: #546071;
+
+// 高亮色值
+$darkblue-highlight-1: #0C5E99; // 左侧导航等
+$darkblue-highlight-2: #4A90E2; // activeRow的border等
+
+// 文字 采用$theme-text开头色值
+
+$darkblue-tab-active-bg-1: #1e252f;
+
+$darkblue-input-bg: #111B2D;
+
+$darkblue-select-dropdown-active: #b8e6fb;
+
+/* ----------------------- 深蓝主题 DARK2 END ----------------------- */
+
+@import "tools/mixins";

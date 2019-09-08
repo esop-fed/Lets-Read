@@ -1,0 +1,706 @@
+// 主题风格定制
+:global {
+    .dark-theme {
+        background: $theme-background_22;
+        color: $theme-text-dark;
+
+        :global {
+            .ant-layout {
+                background: $theme-background_22;
+            }
+            .ant-menu {
+                background: $theme-background_22;
+                .ant-menu-item {
+                    //background: $theme-background_2d;
+                    margin: 0 !important;
+                    &:hover {
+                        color: $theme-text-light !important;
+                        background-color: $theme-highlight-1 !important;
+                    }
+                    &.ant-menu-item-selected {
+                        color: #fff;
+                        background: $theme-highlight-1;
+                    }
+                }
+                //&.ant-menu-root > .ant-menu-item {
+                //    font-size: $font-size-default;
+                //}
+            }
+
+            .ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+                background: $theme-background_38;
+                .ant-menu-item {
+                    //font-size: $font-size-small;
+                }
+            }
+            .ant-menu-inline, .ant-menu-vertical, .ant-menu-vertical-left {
+                border: none;
+            }
+            .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+                background: $theme-background_2d;
+                box-shadow: none;
+            }
+
+            .ant-layout-sider {
+                background: $theme-background_38;
+                border-right: 1px solid $theme-border_4f;
+            }
+            .ant-layout-header {
+                background: $theme-background_2d;
+                border-bottom: 1px solid $theme-border_4f;
+            }
+            .ant-tabs {
+                color: $theme-text-dark;
+                .ant-tabs-bar {
+                    .ant-tabs-nav {
+                        .ant-tabs-tab {
+                            background: $theme-background_2d;
+                            color: $theme-text-dark;
+                            &:hover {
+                                color: $theme-text-light;
+                            }
+                            &.ant-tabs-tab-active {
+                                background: $theme-tab-active-bg !important;
+                                color: $theme-text-light !important;
+                                border-bottom: 1px solid $theme-highlight-1;
+                            }
+                        }
+                    }
+                }
+                .ant-tabs-ink-bar {
+                    background-color: $theme-highlight-1;
+                }
+            }
+
+            .ant-tabs-tab-prev, .ant-tabs-tab-next {
+                color: $theme-text-dark;
+            }
+
+            // table
+            .ant-table-wrapper {
+                .ant-table {
+                    color: $theme-text-dark;
+                    .ant-table-content {
+                        .ant-table-scroll {
+                            .ant-table-header {
+                                background: $theme-background_55;
+                                overflow: hidden;
+                                margin-bottom: 0 !important;
+                            }
+                        }
+                        .ant-table-fixed-right {
+                            .ant-table-header {
+                                background: $theme-background_55;
+                            }
+                        }
+                        .ant-table-body {
+                            .ant-table-thead > tr > th {
+                                background: $theme-background_55;
+                                color: rgba(255, 255, 255, 0.65);
+                            }
+                            > table {
+                                border-color: $theme-border_4f;
+                            }
+                            td, th {
+                                border-color: $theme-border_4f;
+                            }
+                            .ant-table-tbody {
+                                .ant-table-expanded-row {
+                                    background: none;
+                                }
+                                .ant-table-row:hover {
+                                    &:nth-of-type(even) {
+                                        td {
+                                            background: none;
+                                        }
+                                    }
+                                    &:hover {
+                                        td {
+                                            background: $theme-tab-active-bg !important;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .ant-table {
+                .ant-table-thead > tr > th {
+                    background: #555 !important;
+                    color: rgba(255, 255, 255, 0.65);
+                    border-top: 1px solid $theme-border_4f;
+                    border-bottom: 1px solid $theme-border_4f;
+                }
+                .ant-table-tbody > tr > td {
+                    color: rgba(255, 255, 255, 0.85);
+                }
+            }
+
+            .ant-table-row-expand-icon {
+                border-color: $theme-border_4f !important;
+                background: none !important;
+                color: $theme-text-title !important;
+            }
+
+            // select
+            .ant-select {
+                color: $theme-text-title;
+                .ant-select-selection {
+                    background: $theme-input-bg;
+                    border: 1px solid $theme-background_55;
+                    border-radius: $radius;
+                    box-shadow: none !important;
+                    &:hover {
+                        //border-color: $theme-highlight-1;
+                        .ant-select-selection__clear {
+                            background: $theme-background_2d;
+                            color: $theme-background_55;
+                        }
+                    }
+                    .ant-select-selection__rendered {
+                        color: $theme-text-dark;
+                        .ant-select-selection__placeholder {
+                            color: $theme-text-dark; // placeholder字体颜色
+                        }
+                    }
+                    .ant-select-arrow {
+                        color: $theme-select-color;
+                    }
+                }
+                &.ant-select-disabled {
+                    .ant-select-selection {
+                        background-color: $theme-background_55;
+                    }
+                }
+            }
+            //.ant-select-sm .ant-select-selection--single {
+            //    height: 28px;
+            //}
+            // select出现下拉框时的状态
+            .ant-select-open {
+                .ant-select-selection {
+                    border-color: $theme-border_4f !important;
+                    box-shadow: none !important;
+                }
+            }
+
+            .ant-cascader-menu {
+                border-color: $theme-border_4f;
+            }
+
+            .ant-collapse {
+                color: $theme-text-dark;
+                background: #505565 !important;
+                .ant-collapse-item {
+                    & > .ant-collapse-header {
+                        color: $theme-text-dark;
+                    }
+                    .ant-collapse-content {
+                        //background: $theme-background_22;
+                        background: #31353f !important;
+                    }
+                }
+                //    .ant-collapse {
+                //background: $dark-background-2;
+                //color: $theme-text-dark;
+                //.ant-collapse-item {
+                //    & > .ant-collapse-header {
+                //        color: $theme-text-title;
+            }
+            .ant-pagination {
+                color: $theme-text-dark;
+                .ant-pagination-options-size-changer {
+                    color: $theme-text-dark;
+                    .ant-select-selection__rendered {
+                        color: $theme-text-dark;
+                    }
+                    .ant-select-arrow {
+                        color: $theme-text-dark;
+                    }
+                }
+                .ant-pagination-next, .ant-pagination-prev {
+                    .ant-pagination-item-link {
+                        color: $theme-text-dark;
+                    }
+                }
+                .ant-pagination-item-active {
+                    background: $theme-highlight-1;
+                    a {
+                        color: $theme-text-light;
+                    }
+                }
+                .ant-pagination-options-quick-jumper {
+                    //height: 28px !important;
+                    //line-height: 28px !important;
+                    input {
+                        //height: 28px !important;
+                        background: $theme-input-bg;
+                        color: $theme-text-dark;
+                        border-color: $theme-border_4f;
+                        &:focus {
+                            box-shadow: none;
+                            border-color: $theme-highlight-1;
+                        }
+                    }
+                }
+                .ant-pagination-item a {
+                    color: $theme-text-dark;
+                }
+            }
+
+            // select下拉框
+            .ant-select-dropdown {
+                background-color: $theme-background_55;
+                .ant-select-dropdown-menu-item {
+                    color: $theme-text-dark;
+                    &:hover {
+                        color: $theme-text-light;
+                        background-color: $theme-select-selected;
+                    }
+                }
+                .ant-select-dropdown-menu-item-selected {
+                    background-color: $theme-select-selected;
+                    &:hover {
+                        background-color: $theme-select-selected;
+                    }
+                }
+                .ant-select-dropdown-menu-item-active {
+                    background-color: $theme-select-selected;
+                }
+            }
+            .ant-select-selection__clear {
+                background: $theme-background_2d;
+                &:hover {
+                    color: $theme-background_55;
+                }
+            }
+
+            .ant-select-selection--multiple .ant-select-selection__choice {
+                background: none;
+                border: none;
+                color: $theme-text-dark;
+            }
+            .ant-select-selection--multiple .ant-select-selection__choice__remove {
+                color: $theme-text-dark;
+                &:hover {
+                    color: $theme-text-dark;
+                }
+            }
+
+            .has-error .ant-select-selection { // form必填项border为红色
+                border-color: red !important;
+            }
+
+            .ant-form {
+                color: $theme-text-dark;
+            }
+
+            .ant-form-item-label {
+                label {
+                    color: $theme-text-dark;
+                }
+            }
+
+            // inputNumber 数字输入框
+            .ant-input-number {
+                //width: 100%;
+                //height: 28px;
+                //line-height: 26px;
+                background: $theme-input-bg;
+                color: $theme-text-dark !important;
+                border-color: $theme-border_4f;
+                input {
+                    background: $theme-input-bg;
+                    color: $theme-text-title !important;
+                }
+                .ant-input-number-handler-wrap {
+                    background: $theme-background_22;
+                    color: $theme-text-dark;
+                    border-color: $theme-border_4f;
+                    .ant-input-number-handler {
+                        > span {
+                            color: $theme-text-dark;
+                        }
+                    }
+                }
+            }
+            .ant-input-number-handler:active {
+                background: transparent;
+            }
+            .ant-input-number-focused {
+                box-shadow: none;
+            }
+            .ant-input-number-handler-down {
+                border-color: $theme-border_4f;
+            }
+
+            .addon-elem {
+                border: 1px solid $theme-border_4f;
+                color: $theme-text-dark;
+            }
+
+            // 时间选择框
+            .ant-calendar-picker-clear {
+                background: none;
+                color: $theme-text-dark;
+                &:hover {
+                    color: $theme-text-dark;
+                }
+            }
+
+            // input
+            .ant-input {
+                background-color: $theme-input-bg;
+                border: 1px solid $theme-border_4f;
+                border-color: $theme-border_4f !important;
+                color: $theme-text-dark;
+                box-shadow: none;
+                &:focus {
+                    box-shadow: none !important;
+                }
+            }
+            .ant-input-disabled {
+                background: $theme-background_55;
+                color: $theme-text-dark;
+                &:hover {
+                    border-color: $theme-border_4f !important;
+                }
+            }
+            .ant-input-group-addon {
+                border-radius: $radius;
+                background-color: $theme-input-bg;
+                border-color: $theme-border_4f;
+            }
+
+            .ant-popover {
+                z-index: $zIndex-popover;
+                .ant-popover-inner, .ant-popover-arrow {
+                    background-color: $theme-background_55;
+                }
+            }
+
+            .ant-popover-inner-content {
+                background-color: $theme-background_55;
+                .ant-popover-message-title {
+                    color: $theme-text-title;
+                }
+
+                .ant-popover-message {
+                    > .anticon {
+                        color: #f04134;
+                    }
+                }
+            }
+
+            // message
+            .ant-message {
+                .ant-message-notice {
+                    .ant-message-notice-content {
+                        //padding: 0 !important;
+                        .ant-message-success {
+                            //padding: 10px 16px;
+                            //width: 300px;
+                            background-color: #ebf8f2;
+                            border: 1px solid #cfefdf;
+                        }
+                        .ant-message-error {
+                            //padding: 10px 16px;
+                            //width: 300px;
+                            background-color: #fef0ef;
+                            border: 1px solid #fcdbd9;
+                        }
+                    }
+                }
+            }
+
+            // radio
+            .ant-radio-wrapper {
+                color: hsla(0, 0%, 100%, .65);
+            }
+            .ant-radio-inner {
+                border-color: gray;
+                background-color: #3D3D3D;
+            }
+            .ant-radio-disabled + span {
+                color: hsla(0, 0%, 100%, .65);
+            }
+            .ant-radio-disabled .ant-radio-inner {
+                border-color: gray;
+                background-color: #3D3D3D;
+            }
+
+            .ant-table-fixed-header > .ant-table-content > .ant-table-scroll > .ant-table-body {
+                background: none;
+            }
+            .ant-table-fixed-left table, .ant-table-fixed-right table {
+                background: $theme-background_38;
+            }
+
+            .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab .anticon-close {
+                background: none;
+            }
+            .ant-table-tbody {
+                .ant-table-row:hover,
+                tr:hover,
+                tr.ant-table-row-hover {
+                    td {
+                        background: none !important;
+                    }
+                }
+                & > tr > td {
+                    border-color: $theme-border_4f;
+                }
+            }
+            .ant-btn-default {
+                background-color: $theme-background_2d;
+                border-color: $theme-border_4f;
+                color: white;
+                &:hover {
+                    background-color: $theme-border_4f;
+                }
+                &:active {
+                    background-color: $theme-border_4f;
+                }
+                &:focus {
+                    background-color: $theme-border_4f;
+                }
+            }
+
+            .ant-btn {
+                border-color: $theme-border_4f;
+                color: $theme-text-dark;
+                &:hover, &:focus, &:active, &.active {
+                    background: none;
+                    color: $theme-text-light;
+                }
+                &:focus {
+                    background-color: $theme-border_4f;
+                }
+                &.ant-btn-primary {
+                    background-color: $theme-highlight-1;
+                    color: $theme-text-light;
+                    border-color: $theme-highlight-1;
+                }
+                &[disabled] {
+                    background: $theme-background_55;
+                    color: $theme-text-disabled;
+                }
+            }
+            .ant-table-placeholder {
+                background-color: $theme-background_38;
+                color: $theme-text-dark;
+                border-color: $theme-border_4f;
+            }
+
+            //modal
+            .ant-modal {
+                .ant-modal-body {
+                    background-color: $theme-background_2d;
+                    color: $theme-text-dark;
+                }
+                .ant-modal-header {
+                    border-color: #2d2d2d;
+                    background-color: $theme-background_2d;
+                    .ant-modal-title {
+                        color: $theme-text-title;
+                    }
+                }
+            }
+
+            .form-btn-wrapper {
+                background: #4f4f4f;
+                border-top: 1px solid #2D2D2D;
+            }
+
+            .form-content-wrapper .form-btn-wrapper {
+                background: transparent;
+            }
+
+            .ant-checkbox-wrapper {
+                color: $theme-text-dark;
+            }
+
+            // modal不在Main的dark-theme中，需要单独处理
+            .ant-collapse {
+                background-color: $theme-background_2d;
+                .ant-collapse-item .ant-collapse-header {
+                    color: $theme-text-title;
+                }
+            }
+
+            .ant-checkbox-wrapper {
+                color: $theme-text-dark;
+            }
+
+            .ant-checkbox-inner {
+                border: 1px solid $theme-border_4f;
+                background: none;
+            }
+
+            //icon
+            .anticon-plus {
+                color: rgba(255, 255, 255, 0.65);
+            }
+
+            .ant-input-search-icon {
+                color: hsla(0, 0%, 100%, .85);
+            }
+
+            //cascader
+            .ant-cascader-input.ant-input {
+                background-color: $theme-input-bg !important;
+            }
+            .ant-cascader-picker {
+                background: transparent;
+            }
+            .ant-cascader-picker-label {
+                color: $theme-cascader-text-color;
+            }
+            .ant-cascader-picker-clear {
+                background: $theme-input-bg;
+                color: $theme-cascader-menu-bg;
+            }
+            .ant-cascader-menu {
+                background-color: $theme-cascader-menu-bg;
+            }
+            .ant-cascader-menu-item {
+                &:hover {
+                    background-color: $theme-cascader-menu-item-hover;
+                }
+            }
+            .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled) {
+                background-color: $theme-cascader-menu-item-hover;
+            }
+            .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled), .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
+                background-color: $theme-cascader-menu-item-hover;
+            }
+            .ant-cascader-menu-item-expand:after {
+                color: $theme-select-color;
+            }
+
+            .ant-radio-button-wrapper {
+                border-color: #555;
+                background-color: #333;
+                color: $theme-text-dark;
+                &:not(:first-child)::before {
+                    background-color: $theme-border_4f;
+                }
+            }
+            .ant-radio-button-wrapper-checked {
+                border-color: #40a9ff;
+                background-color: #111 !important;
+                color: #40a9ff;
+            }
+
+            /*----------------------- 自定义通用类名 ------------------------*/
+            .activeTableRow {
+                background: $theme-highlight-1;
+                .editBtn {
+                    color: #fff;
+                }
+            }
+
+            .alert {
+                background-color: $theme-background_55;
+            }
+            .alert-message {
+                color: $theme-text-title;
+            }
+            .alert-description {
+                > dl {
+                    color: $theme-text-title;
+                }
+            }
+
+            .searchGroup {
+                border-bottom: 10px solid #222;
+            }
+
+            .ant-steps-item-icon {
+                border-color: $theme-border_4f;
+            }
+
+            .ant-steps {
+                .ant-steps-item-title {
+                    color: $theme-text-dark;
+                }
+                .ant-steps-item-icon {
+                    background-color: transparent;
+                }
+                .ant-steps-item-wait {
+                    .ant-steps-item-icon {
+                        border-color: $theme-border_4f;
+                        .ant-steps-icon {
+                            color: $theme-text-dark;
+                        }
+                    }
+                    .ant-steps-item-title {
+                        color: $theme-text-dark;
+                    }
+                }
+                .ant-steps-item-finish {
+                    .ant-steps-item-title {
+                        color: $theme-text-dark;
+                    }
+                }
+            }
+
+            .ant-divider {
+                background: $theme-border_4f;
+            }
+        }
+        .ant-dropdown-menu-item > a {
+            color: $theme-text-dark;
+        }
+        //.ant-select-selection__clear:hover {
+        //    background: $theme-background_2d;
+        //    color: $theme-background_55;
+        //}
+        //.ant-select-selection:hover {
+        //    .ant-select-selection__clear {
+        //        background: $theme-background_2d;
+        //        color: $theme-background_55;
+        //    }
+        //}
+        .ant-tooltip {
+            z-index: $zIndex-tooltip;
+        }
+
+        input:-webkit-autofill {
+            -webkit-text-fill-color: $theme-text-dark !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        //.ant-input{                                                // TODO 蓝色版本的颜色，暂时先注释
+        //    color: #fff;
+        //    background-clip: padding-box;
+        //    border: 1px solid #434857;
+        //    border-radius: 0.25rem;
+        //    transition: none;
+        //    &:focus{
+        //        color: #495057;
+        //        background-color: #fff;
+        //        border-color: #71cced;
+        //        outline: 0;
+        //        box-shadow: 0 0 0 0.2rem rgba(25, 151, 198, 0.25);
+        //        &::-webkit-input-placeholder{
+        //            color:#495057;
+        //        }
+        //        &+.ant-input-suffix .ant-input-search-icon{
+        //            color:#495057;
+        //        }
+        //    }
+        //    &+.ant-input-suffix .ant-input-search-icon{
+        //        color:#aaa;
+        //    }
+        //    &::-webkit-input-placeholder{
+        //        color:#aaa;
+        //    }
+        //}
+    }
+}
+
+
+

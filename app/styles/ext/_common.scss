@@ -1,0 +1,128 @@
+// Name          Common
+//
+// Description:      页面上公共样类
+
+:global {
+    // page 公共类
+    // ======================================================
+    .#{$ns}page-container {
+        // position: relative;
+        // height: 100%;
+        // min-width: $page-content-min-width;
+        // overflow: hidden;
+        // > div {
+        //     height: 100%;
+        //     background-color: $body-bg;
+        //     overflow-y: auto;
+        //     overflow-x: hidden;
+        // }
+    }
+
+    // 设置页面上的 padding,(框架保留类,不可重复定义此类)
+    .#{$ns}main {
+        padding: $global-spacer;
+    }
+
+    // 左右布局,页面没有数据时展示信息
+    // =======================================================
+    .area-blank {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+
+        .anticon {
+            margin-right: 6px;
+            font-size: 14px;
+            color: $blue-6;
+        }
+    }
+
+    // 界面边界类, 用于没有sidebar 时设置界面边界padding
+    .boundary-spacer {
+        padding: $spacer;
+    }
+
+    // 左右布局, 页面上 title
+    // =============================================================
+    .page-title {
+        padding: 16px;
+        font-size: 16px;
+        line-height: 28px;
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 500;
+    }
+
+    // 红色按钮 - 比如：撤消按钮
+    .btn-danger {
+        background-color: $red-5;
+        border-color: $red-5;
+        color: #fff;
+        &:hover {
+            background-color: darken($red-5, 15%);
+            border-color: darken($red-5, 15%);
+        }
+    }
+
+    // Lian
+    .cursor-p {
+        cursor: pointer;
+    }
+    .ellipsis {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .clearfix:after,
+    .clearfix:before {
+        content: "";
+        display: table;
+    }
+    .clearfix:after {
+        clear: both;
+    }
+    .fll {
+        float: left;
+    }
+    .flr {
+        float: right;
+    }
+
+    .search-group {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        > div {
+            display: flex;
+            align-items: center;
+            margin-right: $pad-large;
+            > *:first-child {
+                margin-right: $pad-small;
+                white-space: nowrap;
+            }
+
+            // > *:nth-child(2) {
+            //     min-width: 180px;
+            // }
+        }
+    }
+
+    .add-button {
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 !important;
+    }
+    .react-datepicker-popper {
+        z-index: 2000;
+    }
+
+    .flex-center {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

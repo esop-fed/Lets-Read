@@ -1,0 +1,22 @@
+@import './antfont/iconfont.css';
+
+.coloricon {
+  width: 16px; height: 16px;
+  vertical-align: -4px;
+  fill: currentColor;
+  overflow: hidden;
+  margin-right: 6px;
+}
+
+.anticon {
+  font-family: "anticon_user", "anticon" !important;
+  font-size:14px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: -3px;
+}
+
+.anticon:before {
+  font-family: "anticon_user", "anticon" !important;
+}

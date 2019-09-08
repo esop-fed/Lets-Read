@@ -1,0 +1,39 @@
+.root {
+    width: 100%;
+    height: 100%!important;
+    :global {
+        .text-area {
+            height: 100%;
+        }
+        .ant-col-3, .ant-col-11, .ant-col-1, .ant-col-13{
+            height: 100%;
+            .expand {
+                font-size: 23px;
+                position: absolute;
+                display: inline-block;
+                right: 0;
+                top: 50%;
+                cursor: pointer;
+            }
+        }
+        .ant-col-10 {
+            position: relative;
+            height: 100%;
+            .for-container {
+                height: 100%;
+                // position: relative;
+            }
+            .button {
+                position: absolute;
+                top: 10px;
+                left: 400px;
+                background: #1890ff;
+            }
+        }
+        .tree-container {
+            box-shadow: 0 0 4px #9da5ab;
+            position: relative;
+        }
+    }
+}
+

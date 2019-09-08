@@ -1,0 +1,304 @@
+// Name:              Utility(辅助类)
+//
+// Description:       Useful classes(单一用途类, 如: m-l-10)
+// Notict:            辅助类均不加空间名前缀
+
+:global {
+  // clearfix 清除浮动
+  // ====================================================================
+  .clearfix {
+    @include clearfix;
+  }
+
+  // text color 情景文字颜色
+  // =================================================================
+
+  @include text-emphasis-variant('.text-primary',  $brand-primary);
+  @include text-emphasis-variant('.text-success',  $brand-success);
+  @include text-emphasis-variant('.text-info',  $brand-info);
+  @include text-emphasis-variant('.text-warning',  $brand-warning);
+  @include text-emphasis-variant('.text-danger',  $brand-danger);
+  @include text-emphasis-variant('.text-muted',  $brand-muted);
+
+  // backgroung color 情景背景色
+  // ====================================================================
+  @include bg-variant('.bg-primary', $brand-primary);
+  @include bg-variant('.bg-success', $brand-success);
+  @include bg-variant('.bg-info', $brand-info);
+  @include bg-variant('.bg-warning', $brand-warning);
+  @include bg-variant('.bg-danger', $brand-danger);
+
+  // text align 文字对齐方式
+  // ======================================================================
+  .text-justify {
+    text-align: justify !important;
+  }
+
+  .text-nowrap {
+    white-space: nowrap !important;
+  }
+
+  .text-left {
+    text-align: left !important;
+  }
+
+  .text-right {
+    text-align: right !important;
+  }
+
+  .text-center {
+    text-align: center !important;
+  }
+
+  .text-lowercase {
+    text-transform: lowercase !important;
+  }
+
+  .text-uppercase {
+    text-transform: uppercase !important;
+  }
+
+  .text-hide {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+  }
+
+  // Display 显示/隐藏内容
+  // =================================================================
+  .d-none {
+    display: none !important;
+  }
+
+  .d-inline {
+    display: inline !important;
+  }
+
+  .d-inline-block {
+    display: inline-block !important;
+  }
+
+  .d-block {
+    display: block !important;
+  }
+
+  .d-table {
+    display: table !important;
+  }
+
+  .d-table-cell {
+    display: table-cell !important;
+  }
+
+  .d-flex {
+    display: flex !important;
+  }
+
+  .d-inline-flex {
+    display: inline-flex !important;
+  }
+
+  .show {
+    display: block !important;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  .invisible {
+    visibility: hidden;
+  }
+
+  // Float 快速浮动
+  // ==================================================================
+  // TODO(Sharon) remove pull-right, 用float-right 代替
+  .pull-right {
+    float: left !important;
+  }
+
+  .pull-right {
+    float: right !important;
+  }
+
+  .float-left {
+    float: left !important;
+  }
+
+  .float-right {
+    float: right !important;
+  }
+
+  .float-none {
+    float: none !important;
+  }
+
+  // Margin & Padding
+  // 提供 0 至 18px 偶数间隔的 margin 和 padding 单用途类
+  // m: margin, p: padding
+  // l:  left, t: top, r: right, b: bottom
+  // x: 水平方向, y: 垂直方向
+  // 用例: m-l-10, m-10, m-auto 等
+  // =================================================================
+  @each $type, $typeAbbrev in (margin: m, padding: p) {
+    @each $dir, $dirAbbrev in (left: l, top: t, right: r, bottom: b) {
+
+      // 用例: m-l-8, p-t-10
+      @for $i from 0 to 9 {
+        $space: $i * 2;
+
+        .#{$typeAbbrev}-#{$dirAbbrev}-#{$space} {  // m-l-10 p-l
+          #{$type}-#{$dir}: #{$space}px !important;
+        }
+
+        .#{$typeAbbrev}-#{$space} { // m-10 p-10
+          #{$type}: #{$space}px !important;
+        }
+
+        // 水平方向 margin 和 padding 清零单例类, 用例: m-x-0, p-x-0
+        .#{$typeAbbrev}-x-#{$space} {
+          #{$type}-left: #{$space}px !important;
+          #{$type}-right: #{$space}px !important;
+        }
+
+        // 垂直方向 margin 和 padding 清零单例类, 用例: m-y-0, p-y-0
+        .#{$typeAbbrev}-y-#{$space} {
+          #{$type}-top: #{$space}px !important;
+          #{$type}-bottom: #{$space}px !important;
+        }
+      }
+
+      // 各方向 margin 和 padding 设置 auto 值, 用例: m-l-auto, p-t-auto
+      .#{$typeAbbrev}-#{$dirAbbrev}-auto {
+        #{$type}-#{$dir}: auto !important;
+      }
+
+      .#{$typeAbbrev}-#{$dirAbbrev}-small {
+        #{$type}-#{$dir}: $pad-small !important;
+      }
+
+      .#{$typeAbbrev}-#{$dirAbbrev}-default {
+        #{$type}-#{$dir}: $pad-default !important;
+      }
+
+      .#{$typeAbbrev}-#{$dirAbbrev}-large {
+        #{$type}-#{$dir}: $pad-large !important;
+      }
+
+      .#{$typeAbbrev}-x-small {
+        #{$type}-left: $pad-small !important;
+        #{$type}-right: $pad-small !important;
+      }
+
+      .#{$typeAbbrev}-y-small {
+        #{$type}-top: $pad-small !important;
+        #{$type}-bottom: $pad-small !important;
+      }
+
+      .#{$typeAbbrev}-x-default {
+        #{$type}-left: $pad-default !important;
+        #{$type}-right: $pad-default !important;
+      }
+
+      .#{$typeAbbrev}-y-default {
+        #{$type}-top: $pad-default !important;
+        #{$type}-bottom: $pad-default !important;
+      }
+
+      .#{$typeAbbrev}-x-large {
+        #{$type}-left: $pad-large !important;
+        #{$type}-right: $pad-large !important;
+      }
+
+      .#{$typeAbbrev}-y-large {
+        #{$type}-top: $pad-large !important;
+        #{$type}-bottom: $pad-large !important;
+      }
+
+      .#{$typeAbbrev}-small { // p-10
+        #{$type}: $pad-small  !important;
+      }
+
+      .#{$typeAbbrev}-default { // p-10
+        #{$type}: $pad-default  !important;
+      }
+
+      .#{$typeAbbrev}-large { // p-10
+        #{$type}: $pad-large  !important;
+      }
+    }
+
+    // margin 和 padding 整体设置为 auto, 用例: m-auto, p-auto
+    @each $var in (auto) {
+      .#{$typeAbbrev}-#{$var} {
+        #{$type}: $var !important;
+      }
+    }
+  }
+
+  // 长、宽单一用途类, 使用百分比定义
+  // 用例: w-100, h-100
+  // =============================================================
+  @each $type, $typeAbbrev in (width: w, height: h) {
+    @for $i from 1 through 10 {
+      $size: $i * 10;
+      .#{$typeAbbrev}-#{$size} {
+        #{$type}: percentage($size / 100) !important;
+      }
+    }
+
+    // w-auto, h-auto
+    .#{$typeAbbrev}-auto {
+      #{$type}: auto !important;
+    }
+  }
+
+  // 折叠
+  // ========================================================
+  .collapse {
+    display: none;
+  }
+  .collapse.show {
+    display: block;
+  }
+
+
+  // 水平线分割线
+  // =========================================================
+  .divider-horizontal {
+    border-top: 1px solid #e8e8e8;
+    margin: 10px 0;
+  }
+
+  // vertical-align 常用单例类
+  // ========================================================
+  .align-baseline {
+    vertical-align: baseline !important;
+  }
+
+  .align-baseline-middle {
+    vertical-align: -webkit-baseline-middle !important;
+  }
+
+  .align-top {
+    vertical-align: top !important;
+  }
+
+  .align-middle {
+    vertical-align: middle !important;
+  }
+
+  .align-bottom {
+    vertical-align: bottom !important;
+  }
+
+  .align-text-bottom {
+    vertical-align: text-bottom !important;
+  }
+
+  .align-text-top {
+    vertical-align: text-top !important;
+  }
+}

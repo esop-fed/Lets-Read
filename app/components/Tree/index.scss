@@ -1,0 +1,150 @@
+.tree {
+    width: 100%;
+    height: 100%;
+    .header {
+        padding-right: 20px;
+        :global {
+            .btn-reload {
+                position: absolute;
+                right: 0;
+                top: 0;
+                font-size: 13px;
+            }
+        }
+    }
+    :global {
+        .tree-content {
+            height: calc(100% - 40px);
+            > input {
+                border-radius: 0;
+                border: 1px solid $layout-line-color;
+                border-left: none;
+                border-right: none;
+                &::-webkit-input-placeholder {
+                    color: #b5b5b5;
+                    opacity: .8;
+                }
+            }
+            > ul {
+                height: calc(100% - 28px);
+                overflow: auto;
+            }
+        }
+        .tree-content-without-search {
+            > ul {
+                height: 100%;
+            }
+        }
+        .ant-tree {
+            @include attr-responsive-important(padding, $layout-spacer-sm, $layout-spacer);
+            .tree-node-item {
+                @include ellipsis;
+            }
+            &.ant-tree-show-line {
+                li:not(:last-child):before {
+                    border-left: 1px dashed $theme-border_4f !important;
+                }
+                li a {
+                    color: #444;
+                }
+            }
+            .ant-tree-node-content-wrapper {
+                &:hover {
+                    background: transparent;
+                    .ant-tree-title {
+                        .title {
+                            background: #ecf6fd;
+                        }
+                    }
+                }
+                .ant-tree-title {
+                    .title {
+                        padding: 4px;
+                    }
+                }
+            }
+            .ant-tree-node-selected {
+                background: transparent !important;
+                .ant-tree-title {
+                    .title {
+                        background: #d2eafb;
+                    }
+                }
+            }
+        }
+    }
+    &.simple-tree {
+        border: 0;
+        :global {
+            .tree-content {
+                > input {
+                    width: 100%;
+                    border: 1px solid $theme-border_4f;
+                }
+                > ul {
+                    padding-left: 0;
+                    background: transparent;
+                }
+            }
+            .ant-tree.ant-tree-show-line li span.ant-tree-switcher {
+                background: transparent;
+            }
+        }
+    }
+}
+
+:global {
+    .treenode-context-menu {
+        .ant-dropdown-menu-item-selected {
+            background: transparent;
+            color: rgba(0, 0, 0, .65);
+        }
+    }
+
+    // 设置 sidebar 中 Tree 组件搜索框的宽度
+    .sidebar-content-wrapper {
+        .tree-content {
+            > input {
+                width: 100% !important;
+            }
+        }
+    }
+}
+
+:global {
+    .dark-theme, .dark-blue-theme {
+        .tree-container {
+            .ant-tree.ant-tree-show-line li span.ant-tree-switcher {
+                background: transparent;
+                &:after {
+                    color: $theme-text-title
+                }
+            }
+
+            .ant-tree-checkbox .ant-tree-checkbox-inner {
+                background: $theme-background_2d;
+            }
+
+            .ant-tree-checkbox-disabled .ant-tree-checkbox-inner {
+                background: $theme-background_55;
+            }
+
+            .ant-tree li .ant-tree-node-content-wrapper {
+                color: $theme-text-dark;
+            }
+
+            .ant-tree .ant-tree-node-content-wrapper:hover .title {
+                background: $placeholder-color;
+            }
+
+            .ant-tree > .tree-node-item .ant-tree-node-selected .ant-tree-title .title {
+                background-color: $theme-highlight-1;
+                color: $theme-text-title;
+            }
+
+            .ant-tree-checkbox-disabled.ant-tree-checkbox-checked .ant-tree-checkbox-inner:after {
+                border-color: $theme-text-disabled;
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+@import "overwrite/antd";
+@import "form";
+@import "table";
+@import "layout";
+@import "common"; // 页面共用样式
+@import "modal";
+
+
+::-webkit-scrollbar/*整体部分*/
+{
+    width: 8px;
+    height:8px;
+}
+
+::-webkit-scrollbar-track/*滑动轨道*/
+{
+    display: none;
+    border-radius: 10px;
+    background: #192130;
+}
+
+::-webkit-scrollbar-thumb/*滑块*/
+{
+    border-radius: 10px;
+    padding-top: 4px;
+    // -webkit-box-shadow: inset 0 0 5px rgba(114,114,114,0.2);
+    background: rgba(255,255,255,0.25);
+}
+
+::-webkit-scrollbar-thumb:hover/*滑块效果*/
+{
+    border-radius: 10px;
+    // -webkit-box-shadow: inset 0 0 5px rgba(114,114,114,0.2);
+    background: rgba(255,255,255,0.4);
+}

@@ -1,0 +1,305 @@
+// Name          form
+//
+// Description:            存放 form 相关的样式类, 包含覆盖蚂蚁 Form 组件样式类
+// =======================================================
+
+$form-item-margin-bottom: 18px;
+
+:global {
+
+    // 覆盖蚂蚁 Form 组件样式类
+    .ant-form {
+        .ant-form-item {
+            margin-bottom: $form-item-margin-bottom;
+            .ant-form-item-label {
+                line-height: $input-height;
+                padding: 0;
+            }
+            .ant-form-item-control {
+                line-height: 1;
+                .ant-checkbox-wrapper {
+                    line-height: $input-height;
+                }
+                input, .ant-select-selection {
+                    border-radius: $radius;
+                }
+                input[disabled], .ant-select-disabled > .ant-select-selection {
+                    border-color: $theme-border_4f;
+                    color: $theme-text-dark;
+                }
+                .ant-input-number-disabled {
+                    div, .ant-input-number-input-wrap {
+                        border: $theme-input-bg-disabled;
+                    }
+                }
+            }
+        }
+    }
+
+    // 按照 24 栅格系统封装
+    // 用例 qx-form-col-7-17
+    // ================================================
+
+    // label 和 control 组合
+    $cols: (
+        3: 21,
+        4: 20,
+        5: 19,
+        6: 18,
+        7: 17,
+        8: 16
+    );
+
+    // form-basic
+    %form-basic {
+        font-size: 12px;
+        color: $input-color;
+
+        // overwrite antd form
+        .ant-form-item {
+            display: flex;
+        }
+
+        // 类似于form,仅用于展示readonly
+        .form-item {
+            display: flex;
+            margin-bottom: $form-item-margin-bottom;
+            height: $input-height;
+            line-height: $input-height;
+
+            &:before {
+                content: " ";
+                display: table;
+            }
+
+            .form-label {
+                text-align: right;
+
+                @extend %ellipsis-basic;
+
+                &:after { // 间隔
+                    content: "";
+                    margin: 0 8px 0 2px;
+                    position: relative;
+                    top: -0.5px;
+                }
+            }
+
+            .form-control {
+
+                @mixin readonly-color {
+                    color: $input-color;
+                    border-color: $theme-input-bg-readonly;
+                    background-color: $theme-input-bg-readonly;
+                }
+
+                text-indent: 7px;
+                border-radius: $input-border-radius;
+                background-color: $theme-input-bg-readonly;
+
+                @extend %ellipsis-basic;
+
+                input[disabled], .ant-select-disabled > .ant-select-selection {
+                    border: none;
+                    color: $theme-text-dark;
+                }
+
+                .ant-input-group-wrapper {
+                    display: flex;
+                    input.ant-input-disabled {
+                        @include readonly-color;
+                    }
+                }
+
+                .ant-input-number-disabled {
+                    div, .ant-input-number-input-wrap, input.ant-input-number-input {
+                        @include readonly-color;
+                    }
+                }
+
+                span.ant-cascader-picker-disabled {
+                    .ant-cascader-picker-label {
+                        @include readonly-color;
+                        padding: 0;
+                    }
+                }
+
+                span.ant-input-group-addon,
+                .addon-after {
+                    //border: 1px solid $addon-bg-color;
+                }
+            }
+        }
+        // 用途提示信息样式, 与 form-item 同级用
+        .form-item-tip {
+            margin-top: -($form-item-margin-bottom - 2); // -16px
+            &:before {
+                content: "";
+            }
+        }
+    }
+
+    // 生成 qx-form-col-7-17 等相关布局
+    @each $labelCol, $controlCol in ($cols) {
+        .#{$ns}form-col-#{$labelCol}-#{$controlCol} {
+
+            @extend %form-basic; // form 基本样式
+
+            .ant-form-item .ant-form-item-label, // 覆盖蚂蚁组件
+            .form-item .form-label, // 自定义form
+            .form-item-tip:before { // 用于提示信息样式, 与 form-item 同级用
+                flex: $labelCol;
+            }
+
+            .ant-form-item .ant-form-item-control-wrapper,
+            .form-item .form-control,
+            .form-item-tip .tip-text {
+                flex: $controlCol;
+            }
+        }
+    }
+    .qx-form-col-auto-size {
+        .ant-form-item {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        .ant-form-item .ant-form-item-label, // 覆盖蚂蚁组件
+        .form-item .form-label, // 自定义form
+        .form-item-tip:before { // 用于提示信息样式, 与 form-item 同级用
+            min-width: 80px;
+        }
+
+        .ant-form-item .ant-form-item-control-wrapper,
+        .form-item .form-control,
+        .form-item-tip .tip-text {
+            flex: 1;
+        }
+    }
+
+    .form-info {
+        $labelWidth: 72px; // label6个文字的宽度:75px+ label与input间距:8px
+        clear: both;
+        > div {
+            float: left;
+
+            height: 100%;
+            width: 50%;
+            margin-bottom: 8px;
+            padding-right: 12px;
+
+            line-height: 22px;
+            label {
+                display: block;
+                float: left;
+
+                height: 28px;
+                width: $labelWidth;
+                padding-right: 8px;
+
+                text-align: right;
+                color: #666;
+                line-height: 28px;
+
+                overflow: auto;
+            }
+            > label:nth-child(2n) {
+                width: calc(100% - #{$labelWidth});
+                padding-left: 8px;
+
+                color: #444;
+                text-align: left;
+                background-color: #f0f0f0;
+                border-radius: 2px;
+            }
+            &:last-child {
+                width: 100%;
+            }
+            &:nth-child(2n) {
+                width: 50%;
+            }
+        }
+    }
+
+    .dark-theme {
+        .form-info > div label {
+            color: $theme-text-dark;
+        }
+
+        .form-info > div > label:nth-child(2n) {
+            color: $theme-text-dark;
+            background-color: $theme-background_22;
+        }
+    }
+
+    .dark-blue-theme {
+        .form-info > div label {
+            color: $theme-text-dark;
+        }
+
+        .form-info > div > label:nth-child(2n) {
+            color: $theme-text-dark;
+            background-color: $theme-background_22;
+        }
+    }
+
+    // 一行多个input的那种表单
+    // 用法: 每一行三个用div包起来
+    .form-row-multi-items {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        //margin-left: -20px;
+        //margin-right: -20px;
+        .ant-form-item, .form-item{
+            padding-left: 20px;
+            padding-right: 20px;
+            flex: 1;
+        }
+        .ant-form-item .ant-form-item-label, .form-item .form-label {
+            height: $input-height;
+        }
+        // 那种一行两个input,左1 右2的表单。注：单独写是因为否则与一行三列的无法对齐
+        &.form-row-1-2 {
+            .ant-form-item {
+                &:first-child {
+                    width: 33.3333%;
+                    flex: initial;
+                }
+            }
+        }
+        // 那种一行两个input,左2 右1的表单。注：单独写是因为否则与一行三列的无法对齐
+        &.form-row-2-1 {
+            .ant-form-item {
+                &:first-child {
+                    width: 66.6666%;
+                    flex: initial;
+                }
+            }
+        }
+    }
+
+    // 一行三个input的那种表单
+    // 用法: 多行用div包起来
+    // 如果有input要占两列宽，同时加上.w-66
+    // 如果有input要占三列宽，同时加上.w-100
+    .form-row-multi-items-block {
+        display: flex;
+        flex-flow: row wrap;
+        //margin-left: -20px;
+        //margin-right: -20px;
+        .ant-form-item, .form-item{
+            padding-left: 20px;
+            padding-right: 20px;
+            width: 33.333333%;
+        }
+        .flex-form-item {
+            width: 100% !important;
+        }
+        // 如果内部有动态render的表单，还会有这种嵌套情况
+        .form-row-multi-items-block {
+            margin-left: 0;
+            margin-right: 0;
+            width: 100%;
+        }
+    }
+}

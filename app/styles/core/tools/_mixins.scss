@@ -1,0 +1,124 @@
+// Name      Mixin
+//
+// Description:       Useful classes(常用的需要include及extend引入的都放在这里(如字数过多做省略处理的ellipsis(@mixin, %)), 负责功能方面的文件)
+
+// hover、focus 设置样式
+// ========================================================
+@mixin hover-focus {
+  &:focus,
+  &:hover {
+    @content;
+  }
+}
+
+// 情景文字颜色样式类 mixin
+// ========================================================
+@mixin text-emphasis-variant($parent, $color) {
+  #{$parent} {
+    color: $color !important;
+  }
+
+  a#{$parent} {
+    @include hover-focus {
+      color: darken($color, 10%) !important;
+    }
+  }
+}
+
+// 情景背景色
+// ========================================================
+@mixin bg-variant($parent, $color) {
+  #{$parent} {
+    background-color: $color !important;
+  }
+  a#{$parent} {
+    @include hover-focus {
+      background-color: darken($color, 10%) !important;
+    }
+  }
+}
+
+// 禁止换行,超出容器部分文字做省略处理(以...结束)
+// ============================================================
+%ellipsis-basic {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin ellipsis($length: 100%) {
+  @extend %ellipsis-basic;
+  width: $length
+}
+
+// 多行文字截断
+// ==============================================================
+@mixin line-clamp($lines: 2) {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webket-line-clamp: $lines;
+}
+
+// 水平居中
+// =============================================================
+@mixin center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+// 大小屏切换
+@mixin attr-responsive($name, $attr-sm, $attr-xl) {
+    #{$name}: $attr-sm;
+    @media (min-width: $screen-xl-min) {
+        #{$name}: $attr-xl;
+    }
+}
+@mixin attr-responsive-important($name, $attr-sm, $attr-xl) {
+    #{$name}: $attr-sm !important;
+    @media (min-width: $screen-xl-min) {
+        #{$name}: $attr-xl !important;
+    }
+}
+// 只在大屏添加的属性
+@mixin attr-xl($name, $attr) {
+    @media (min-width: $screen-xl-min) {
+        #{$name}: $attr;
+    }
+}
+
+
+
+// 滚动条
+// ==============================================================
+@mixin scrollbar {
+    &::-webkit-scrollbar {
+        height: $scrollbar-width;
+        width: $scrollbar-width;
+        background: transparent;
+    }
+    &::-webkit-scrollbar-track {
+        display: none;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: $scrollbar-thumb-bg;
+        border-radius: $scrollbar-border-radius;
+        transition: background 0.3s;
+        &:horizontal {
+            border-top: 5px solid #fff;
+        }
+        &:vertical {
+            border-left: 5px solid #fff;
+        }
+        &:hover, &:active{
+            background: $scrollbar-thumb-bg-hover;
+            border-color: $scrollbar-thumb-bg-hover;
+            border-radius: $scrollbar-border-radius-hover;
+        }
+    }
+
+}
+
