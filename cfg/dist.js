@@ -30,7 +30,7 @@ let config = merge(common.baseConfig, {
         path.join(__dirname, '../app/index')
     ],
     output: {
-        path: path.join(__dirname, '/../dist'),
+        path: path.join(__dirname, '/../docs'),
         filename: 'assets/js/app_[chunkhash:8].js',
         chunkFilename: 'assets/js/[name]_[chunkhash:8].chunk.js'
     },
