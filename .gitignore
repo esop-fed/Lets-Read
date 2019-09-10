@@ -13,8 +13,8 @@ pids
 *.pid
 *.seed
 
-# Directory for dist and release
-dist/*
+# Directory for docs and release
+docs/*
 release/*
 
 # webpack plugins

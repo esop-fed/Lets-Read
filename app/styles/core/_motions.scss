@@ -10,7 +10,7 @@
   };
   // 文字闪烁 3 次
   // http://dabblet.com/gist/46fe09e5f2b97d6f282d
-  #{$ns}highlight {
+  .highlight {
     animation: .5s blink-smooth 6 alternate;
   }
 }

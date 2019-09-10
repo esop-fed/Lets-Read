@@ -5,9 +5,6 @@ import MobX from 'mobx';
 import { Form } from 'antd';
 import _ from 'lodash';
 import moment from 'moment';
-import cryptoSha256 from 'crypto-js/sha256';
-import cryptoUtf8 from 'crypto-js/enc-utf8';
-import cryptoBase64 from 'crypto-js/enc-base64';
 
 const toTreeData = (dataList = [], config = {}) => {
     const _extendTreeDataProp = (items, extProp = {}) => {
@@ -485,15 +482,6 @@ function formatYYYYMMDD(value) {
         .format(format);
 }
 
-const sha256Encode = (value) => {
-    return cryptoSha256(value)
-        .toString();
-};
-
-const base64Encode = (value) => {
-    return cryptoBase64.stringify(cryptoUtf8.parse(value));
-};
-
 export {
     toTreeData,
     isArrayEqual,
@@ -504,20 +492,16 @@ export {
     buildFormData,
     analysisUrlSearch,
     formatYYYYMMDD,
-    sha256Encode,
-    base64Encode
 };
 
 export default {
     toTreeData,
-    isArrayEqual,
-    valuesToStrings,
+    isArrayEqual, // 1
+    valuesToStrings, // 1
     generateHash,
-    buildFilterParams,
+    buildFilterParams, // 1
     mapPropsToFields,
     buildFormData,
     analysisUrlSearch,
     formatYYYYMMDD,
-    sha256Encode,
-    base64Encode
 };
