@@ -46,9 +46,6 @@ let config = merge(common.baseConfig, {
                 from: `build/${libName}.js`,
                 to: ''
             }, {
-                from: 'app/_config/api.js',
-                to: ''
-            }, {
                 from: 'app/images/icons',
                 to: 'icons'
             },
