@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { LocaleProvider } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
-import { initIndexedDB } from 'utils/IndexedDB';
+import { IndexedDB, msgCenter } from 'utils';
 
 import { useStrict } from 'mobx';
 import { AppContainer } from 'react-hot-loader';
@@ -15,17 +15,21 @@ import RootContainer from './Router';
 
 moment.locale('zh-cn');
 
-require('common/global'); // 引入自定义的window全局变量和函数
+// require('common/global'); // 引入自定义的window全局变量和函数
 require('normalize.css/normalize.css');
 require("styles/index.scss"); // 引入框架样式文件
 
 // 引入自定义icon
-require('styles/core/tools/iconfont/font/iconfont');
-require('styles/core/tools/iconfont/index.css'); // 引入覆盖font/iconfont.less文件样式类 文件
+// require('styles/core/tools/iconfont/font/iconfont');
+// require('styles/core/tools/iconfont/index.css'); // 引入覆盖font/iconfont.less文件样式类 文件
 
 useStrict(true); // 强制所有对mobx-store的更改都得通过action
 
-initIndexedDB();
+IndexedDB.initIndexedDB(() => {
+    setTimeout(() => {
+        msgCenter.publish('initialDbSuccess', true)
+    }, 300)
+});
 
 const render = (Component) => {
     ReactDOM.render((

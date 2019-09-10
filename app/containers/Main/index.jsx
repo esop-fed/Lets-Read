@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import Editor from 'for-editor';
 import { saveAs } from 'file-saver';
-import { wrapperTableName } from 'utils/IndexedDB';
+import { IndexedDB , msgCenter } from 'utils';
 import { Tree } from 'components';
 import treeData from './readList.json';
 
@@ -13,6 +13,8 @@ import styles from './index.scss';
 import './markdown.scss';
 
 const json = require('./markownList.json');
+
+const { wrapperTableName } = IndexedDB;
 
 const T_CUSTOM_TABLE = "read_table"; // test 表
 const dbUtil = wrapperTableName(T_CUSTOM_TABLE);
@@ -24,23 +26,30 @@ export default class Main extends React.Component {
         expand: true,
     };
 
-    handleChange = (value, v, b) => {
-        console.log(v, b);
+    handleChange = (value) => {
         this.setState({
             value
         });
     };
 
     componentDidMount() {
-        if (json && json.length) {
-            dbUtil.clearStore();
-            json.forEach((item) => {
-                dbUtil.insertData({
-                    id: item.id, // 表格id
-                    value: item.value
+        msgCenter.subscribe('initialDbSuccess', () => {
+            if (json && json.length) {
+                dbUtil.clearStore();
+                json.forEach((item) => {
+                    dbUtil.insertData({
+                        id: item.id, // 表格id
+                        value: item.value
+                    }).then(() => {
+                        this.forceUpdate();
+                    });
                 });
-            });
-        }
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        msgCenter.unsubscribe("initialDbSuccess");
     }
 
     handleSelect = (selectData) => {
