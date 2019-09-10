@@ -89,9 +89,6 @@ let config = merge(common.baseConfig, {
                 from: 'app/styles/core/tools/iconfont/antfont',
                 to: 'assets/css/antfont'
             }, {
-                from: 'app/_config/api.js',
-                to: 'assets/js/'
-            }, {
                 from: `build/${libName}.js`,
                 to: 'assets/js/'
             }, {

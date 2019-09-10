@@ -1,7 +1,6 @@
 # generate file
 build
 manifest.json
-app/_config/api.js
 app/containers/page/path.json
 
 # Logs
