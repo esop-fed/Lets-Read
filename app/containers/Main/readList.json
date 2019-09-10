@@ -11,4 +11,11 @@
     "pId": 1,
     "contextMenuKeys": ["open"],
     "link": "https://segmentfault.com/a/1190000020305603"
+}, {
+    "id": 3,
+    "code": "001-2",
+    "name": "CSS 变量教程",
+    "pId": 1,
+    "contextMenuKeys": ["open"],
+    "link": "https://www.ruanyifeng.com/blog/2017/05/css-variables.html"
 }]
