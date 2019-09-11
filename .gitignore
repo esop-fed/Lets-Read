@@ -14,6 +14,7 @@ pids
 
 # Directory for docs and release
 release/*
+build/*
 
 # webpack plugins
 .happypack
