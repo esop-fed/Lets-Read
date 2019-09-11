@@ -13,15 +13,15 @@ const walkSync = dir => {
     if (fs.statSync(childPath).isDirectory()) {
       pathlist = walkSync(childPath, pathlist);
     } else {
-      file.endsWith('index.jsx') &&
+      file.endsWith('.json') &&
         pagelist.push(
-          childPath.replace(/\.\/app\/containers\/page\//, '').replace(/\/index\.jsx/, '')
+          childPath.replace(/\.\/app\/containers\/markdownJsonList\//, '')
         );
     }
   });
   return pathlist;
 };
 
-walkSync('./app/containers/page');
+walkSync('./app/containers/markdownJsonList');
 
-fs.writeFileSync('app/containers/page/path.json', JSON.stringify(pagelist, null, '\t'));
+fs.writeFileSync('app/containers/path.json', JSON.stringify(pagelist, null, '\t'));

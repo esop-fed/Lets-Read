@@ -26,14 +26,20 @@
             .button {
                 position: absolute;
                 top: 10px;
-                left: 400px;
+                right: 120px;
                 background: #1890ff;
+                z-index: 99999;
             }
         }
         .tree-container {
             box-shadow: 0 0 4px #9da5ab;
             position: relative;
         }
+    }
+}
+:global {
+    .ant-message {
+        z-index: 99999;
     }
 }
 

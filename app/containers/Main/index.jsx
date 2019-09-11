@@ -6,13 +6,11 @@ import Editor from 'for-editor';
 import { saveAs } from 'file-saver';
 import { IndexedDB , msgCenter } from 'utils';
 import { Tree } from 'components';
-import treeData from './readList.json';
+import { readList } from './readList';
 
 import styles from './index.scss';
 
-import './markdown.scss';
-
-const json = require('./markownList.json');
+const json = require('../jsonMap').default;
 
 const { wrapperTableName } = IndexedDB;
 
@@ -35,11 +33,16 @@ export default class Main extends React.Component {
     componentDidMount() {
         msgCenter.subscribe('initialDbSuccess', () => {
             if (json && json.length) {
-                dbUtil.clearStore();
-                json.forEach((item) => {
-                    dbUtil.insertData({
-                        id: item.id, // 表格id
-                        value: item.value
+                dbUtil.queryData().then((data) => {
+                    json.forEach((item) => {
+                        let currentData = _.find(data, ['id', item.id]);
+                        if (currentData) {
+                            if (currentData.date < item.date) {   // json日期大于本地存储日期更新
+                                dbUtil.updateData(item)
+                            }
+                        } else {
+                            dbUtil.insertData(item);
+                        }
                     });
                 });
             }
@@ -75,15 +78,19 @@ export default class Main extends React.Component {
     };
 
     handleSave = (value) => {
-        const { id } = this.state.selectData;
-        if (!id) return;
+        const { id, pId } = this.state.selectData;
+        if (!id || id === pId) {
+            message.error('选择一篇文章呦');
+            return;
+        }
         dbUtil.queryData().then((data) => {
             let currentData = _.find(data, ['id', id]);
             if (currentData) {
                 currentData.value = value;
                 dbUtil.updateData({
                     id, // 表格id
-                    value
+                    value,
+                    date: +new Date()
                 }).then(() => {
                     message.success('保存成功');
                     this.editNode.setState({ preview: true});
@@ -91,7 +98,8 @@ export default class Main extends React.Component {
             } else {
                 dbUtil.insertData({
                     id, // 表格id
-                    value
+                    value,
+                    date: +new Date()
                 }).then(() => {
                     message.success('保存成功');
                     this.editNode.setState({ preview: true});
@@ -101,8 +109,14 @@ export default class Main extends React.Component {
     };
 
     produceJson = () => {
+        const { id, pId } = this.state.selectData;
+        if (!id || id === pId) {
+            message.error('选择一篇文章呦');
+            return;
+        }
         dbUtil.queryData().then((data) => {
-            let file = new File([JSON.stringify(data)], "read.json", {type: "text/plain;charset=utf-8"});
+            let currentData = _.find(data, ['id', id]);
+            let file = new File([JSON.stringify(currentData)], `read-${id}.json`, {type: "text/plain;charset=utf-8"});
 
             saveAs(file);
         });
@@ -120,7 +134,7 @@ export default class Main extends React.Component {
 
         return <Row className={styles.root}>
             <Col span={expand ? 3 : 1}>
-                <Tree treeData={treeData} rightable onOpen={this.handleOpen} onSelect={this.handleSelect}/>
+                <Tree treeData={readList} rightable onOpen={this.handleOpen} onSelect={this.handleSelect}/>
                 {
                     expand ? <span className='expand' onClick={this.handleShrink}>&lt;</span> : <span className='expand' onClick={this.handleExpand}>&gt;</span>
                 }
