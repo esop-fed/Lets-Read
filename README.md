@@ -9,6 +9,13 @@ cnpm i
 npm start
 ```
 
+```bash
+npm run dist
+git add .
+git commit -m "fix: xxx"
+git pull origin master
+```
+
 然后打开http://localhost:8888
 
 https://esop-fed.github.io/Lets-Read
