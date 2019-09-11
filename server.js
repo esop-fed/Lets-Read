@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 let chalk = require('chalk');
 const config = require('./webpack.config');
+const PORT = require('./app/_config/dev/api').port;
 
 /**
  * Flag indicating whether webpack compiled for the first time.
@@ -13,7 +14,7 @@ let processEnv = {};
 
 const compiler = webpack(config);
 
-new WebpackDevServer(compiler, config.devServer).listen(8888, (err) => {
+new WebpackDevServer(compiler, config.devServer).listen(PORT.devServer, (err) => {
     if (err) {
         console.log(err);
         return;
@@ -41,8 +42,8 @@ compiler.plugin('done', () => {
         // Ensures that we log after webpack printed its stats (is there a better way?)
         setTimeout(() => {
             console.log(chalk.green.bold('\n✓ The bundle is now ready for serving!\n'));
-            console.log(chalk.magenta.bold('  Open in iframe mode:'), chalk.yellow.bold('http://localhost:' + 8888 + '/webpack-dev-server/'));
-            console.log(chalk.magenta.bold('  Open in inline mode:'), chalk.yellow.bold('http://localhost:' + 8888 + '/\n'));
+            console.log(chalk.magenta.bold('  Open in iframe mode:'), chalk.yellow.bold('http://localhost:' + PORT.devServer + '/webpack-dev-server/'));
+            console.log(chalk.magenta.bold('  Open in inline mode:'), chalk.yellow.bold('http://localhost:' + PORT.devServer + '/\n'));
             console.log(`  ${chalk.yellow.bold('HMR is active. The bundle will automatically rebuild and live-update on changes.')}`);
             buddhaBless();
         }, 400);

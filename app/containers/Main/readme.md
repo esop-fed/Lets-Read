@@ -1,12 +1,11 @@
 ### 注意事项
 
 
-1.所有列表维护在 `readList.json `里面；
+1.所有列表维护在 `readList.js `里面；
 
 ```json
 {
     "id": 2,
-    "code": "001-1",
     "name": "xxxxxxx",
     "pId": 1,
     "disabledContext": true,   // 禁用右键菜单
@@ -15,5 +14,6 @@
 }
 ```
 
-2.写完文档之后必须生成`json`文件，手动复制覆盖 `markownList.json` 文件， 并且执行`npm run dist`打包，在合并代码
+2.写完文档之后保存, 生成`json`文件，生成的json文件名称是文章的Id生产的，生成后将json文件放到`markdownJsonList`文件下(已有文件名则进行覆盖)；
+将所有的json List读取在 `path.json`中；最后并且执行`npm run dist`打包，在合并代码
 
