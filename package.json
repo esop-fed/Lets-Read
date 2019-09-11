@@ -11,7 +11,7 @@
     "predev": "npm run build-path",
     "dev": "node server.js --env=dev",
     "build-path": "node scripts/build-path.js",
-    "predist": "rimraf docs",
+    "predist": "rimraf docs && npm run build-path",
     "dist": "webpack --env=dist",
     "postdist": "copyfiles -f docs/assets/index.html docs && copyfiles -f docs/assets/favicon.ico docs && rimraf docs/assets/index.html docs/assets/favicon.ico",
     "postinstall": "npm run ddl",
