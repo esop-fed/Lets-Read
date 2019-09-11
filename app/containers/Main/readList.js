@@ -36,7 +36,14 @@ const list = [{
     "id": "4",
     "name": "设计模式",
     "disabledContext": true,
-    "pId": "4"
+    "pId": "4",
+    children: [{
+        "id": "4-1",
+        "name": "函数组合",
+        "pId": "4",
+        "contextMenuKeys": ["open"],
+        "link": "https://juejin.im/post/5d50bfebf265da03cb122b6f"
+    }]
 }, {
     "id": "5",
     "name": "node",
