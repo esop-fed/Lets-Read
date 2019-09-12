@@ -15,7 +15,6 @@ import RootContainer from './Router';
 
 moment.locale('zh-cn');
 
-// require('common/global'); // 引入自定义的window全局变量和函数
 require('normalize.css/normalize.css');
 require("styles/index.scss"); // 引入框架样式文件
 

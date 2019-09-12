@@ -3,7 +3,8 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 let chalk = require('chalk');
 const config = require('./webpack.config');
-const PORT = require('./app/_config/dev/api').port;
+
+const DefaultPort = process.env.PORT || 8888;
 
 /**
  * Flag indicating whether webpack compiled for the first time.
@@ -11,10 +12,9 @@ const PORT = require('./app/_config/dev/api').port;
  */
 let isInitialCompilation = true;
 let processEnv = {};
-
 const compiler = webpack(config);
 
-new WebpackDevServer(compiler, config.devServer).listen(PORT.devServer, (err) => {
+new WebpackDevServer(compiler, config.devServer).listen(DefaultPort, (err) => {
     if (err) {
         console.log(err);
         return;
@@ -24,32 +24,44 @@ new WebpackDevServer(compiler, config.devServer).listen(PORT.devServer, (err) =>
 
 compiler.plugin('done', () => {
     if (isInitialCompilation) {
-        // open electron app
-        // spawn('npm', ['run', 'electron'], {
-        //     shell: true,
-        //     env: { dlftPort: PORT.devServer, ...process.env },
-        //     stdio: 'inherit',
-        // })
-        //     .on('close', code => process.exit(code))
-        //     .on('error', spawnError => console.error('npm run electron error', spawnError));
-
         // set app proxy
         // spawn('npm', ['run', 'proxy'], { shell: true, env: process.env, stdio: 'inherit' })
         //     .on('close', code => process.exit(code))
         //     .on('error', spawnError => console.error(spawnError));
         // console.log('Listening at localhost:' + PORT.devServer);
 
-        // Ensures that we log after webpack printed its stats (is there a better way?)
         setTimeout(() => {
             console.log(chalk.green.bold('\n✓ The bundle is now ready for serving!\n'));
-            console.log(chalk.magenta.bold('  Open in iframe mode:'), chalk.yellow.bold('http://localhost:' + PORT.devServer + '/webpack-dev-server/'));
-            console.log(chalk.magenta.bold('  Open in inline mode:'), chalk.yellow.bold('http://localhost:' + PORT.devServer + '/\n'));
+            console.log(chalk.magenta.bold('  remote address:'), chalk.yellow.bold('http://' + getIPAddress() + ':' + DefaultPort));
+            console.log(chalk.magenta.bold('  local address:'), chalk.yellow.bold('http://localhost:' + DefaultPort + '/\n'));
             console.log(`  ${chalk.yellow.bold('HMR is active. The bundle will automatically rebuild and live-update on changes.')}`);
             buddhaBless();
         }, 400);
     }
     isInitialCompilation = false;
 });
+
+// 本地IP地址
+function getIPAddress() {
+    const interfaces = require('os').networkInterfaces();
+    let IPAddress = '';
+
+    for (var devName in interfaces) {
+        var iface = interfaces[devName];
+        for (var i = 0; i < iface.length; i++) {
+            var alias = iface[i];
+            if (
+                alias.family === 'IPv4' &&
+                alias.address !== '127.0.0.1' &&
+                !alias.internal
+            ) {
+                IPAddress = alias.address;
+            }
+        }
+    }
+
+    return IPAddress;
+}
 
 
 function buddhaBless() {

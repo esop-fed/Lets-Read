@@ -7,7 +7,7 @@ const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plug
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const common = require('./base');
-const PORT = require('../app/_config/dev/api').port;
+// const PORT = require('../app/_config/dev/api').port;
 const { resolvePath } = require('./defaults');
 
 const libName = require('../manifest').name;
@@ -16,7 +16,6 @@ let config = merge(common.baseConfig, {
     entry: [
         'react-hot-loader/patch', // RHL patch
         'babel-polyfill',
-        'webpack-dev-server/client?http://127.0.0.1:' + PORT.devServer,
         'webpack/hot/only-dev-server',
         './app/index.js'
     ],
@@ -77,7 +76,7 @@ let config = merge(common.baseConfig, {
         // overlay: true,
         historyApiFallback: true,
         hot: true,
-        port: PORT.devServer,
+        // port: PORT.devServer,
         noInfo: true, // 使用进度条的方式替换打包信息
         stats: {
             // Config for minimal console.log mess.
