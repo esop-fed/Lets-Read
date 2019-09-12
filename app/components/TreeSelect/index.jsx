@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TreeSelect, message } from 'antd';
+import { TreeSelect } from 'antd';
 import { PropTypes as MobxPropTypes } from "mobx-react";
 import _ from 'lodash';
 import Util from 'utils/util';

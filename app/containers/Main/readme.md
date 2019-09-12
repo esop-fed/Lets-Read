@@ -3,7 +3,7 @@
 
 1.所有列表维护在 `readList.js `里面；
 
-```json
+```
 {
     "id": 2,
     "name": "xxxxxxx",

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Icon, message } from 'antd';
+import { Icon } from 'antd';
 import _ from 'lodash';
 import classNames from 'classnames';
 import Util from 'utils/util';
