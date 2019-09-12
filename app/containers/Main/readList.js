@@ -32,6 +32,13 @@ const list = [{
     "name": "性能方面",
     "disabledContext": true,
     "pId": "3",
+    children: [{
+        "id": "3-1",
+        "name": "「中高级前端」高性能渲染十万条数据",
+        "pId": "3",
+        "contextMenuKeys": ["open"],
+        "link": "https://juejin.im/post/5d76f469f265da039a28aff7"
+    }]
 }, {
     "id": "4",
     "name": "设计模式",
