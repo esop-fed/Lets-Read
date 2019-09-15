@@ -117,7 +117,7 @@ export default class Main extends React.Component {
         };
 
         try {
-            await this.api.post("/api/message", newData)
+            await this.api.post("/api/message", { [id]: newData });
         } catch (e) {
             message.error(e.toString());
         }
