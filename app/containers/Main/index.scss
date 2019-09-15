@@ -41,5 +41,11 @@
     .ant-message {
         z-index: 99999;
     }
+    .ant-spin-nested-loading {
+        height: 100%;
+        .ant-spin-container {
+            height: 100%;
+        }
+    }
 }
 
