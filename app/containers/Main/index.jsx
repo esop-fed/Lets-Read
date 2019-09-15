@@ -1,16 +1,14 @@
 import React from 'react';
-import { Row, Col, message, Button } from 'antd';
+import { Row, Col, message, Button, Spin, Dropdown, Menu } from 'antd';
 import _ from 'lodash';
 
 import Editor from 'for-editor';
 import { saveAs } from 'file-saver';
-import { IndexedDB , msgCenter } from 'utils';
+import { IndexedDB , msgCenter, API } from 'utils';
 import { Tree } from 'components';
 import { readList } from './readList';
 
 import styles from './index.scss';
-
-const json = require('../jsonMap').default;
 
 const { wrapperTableName } = IndexedDB;
 
@@ -18,10 +16,12 @@ const T_CUSTOM_TABLE = "read_table"; // test 表
 const dbUtil = wrapperTableName(T_CUSTOM_TABLE);
 
 export default class Main extends React.Component {
+    api = new API('auth');
     state = {
         value: '',
         selectData : {},
         expand: true,
+        spinning: false
     };
 
     handleChange = (value) => {
@@ -30,25 +30,29 @@ export default class Main extends React.Component {
         });
     };
 
-    componentDidMount() {
+    componentDidMount = () => {
         msgCenter.subscribe('initialDbSuccess', () => {
-            if (json && json.length) {
-                dbUtil.queryData().then((data) => {
-                    json.forEach((item) => {
-                        let currentData = _.find(data, ['id', item.id]);
-                        if (currentData) {
-                            if (currentData.date < item.date) {   // json日期大于本地存储日期更新
-                                dbUtil.updateData(item)
+            dbUtil.queryData().then( (data) => {
+                this.api.get('/api/message')
+                    .then((res) => {
+                        if (res.data) {
+                            for (let id in res.data) {
+                                let currentData = _.find(data, ['id', id]);
+                                if (_.isObject(res.data[id])) {
+                                    if (currentData) {
+                                        if (currentData.date < res.data[id].date) {   // json日期大于本地存储日期更新
+                                            dbUtil.updateData(res.data[id])
+                                        }
+                                    } else {
+                                        dbUtil.insertData(res.data[id]);
+                                    }
+                                }
                             }
-                        } else {
-                            dbUtil.insertData(item);
                         }
                     });
-                });
-            }
-            this.forceUpdate();
+            });
         });
-    }
+    };
 
     componentWillUnmount() {
         msgCenter.unsubscribe('initialDbSuccess')
@@ -77,30 +81,59 @@ export default class Main extends React.Component {
         if (link) window.open(link);
     };
 
-    handleSave = (value) => {
+    handleSaveAll = () => {
+        this.setState({ spinning: true });
+
+        dbUtil.queryData().then(async (data) => {
+            const allData = {};
+            data && data.forEach((item) => {
+                allData[item.id] = item;
+            });
+
+            try {
+                await this.api.post("/api/message", allData)
+            } catch (e) {
+                message.error(e.toString());
+            }
+
+            message.success("保存成功");
+            this.setState({ spinning: false });
+
+        })
+    };
+
+    handleSave = async (value) => {
+        this.setState({ spinning: true });
         const { id, pId } = this.state.selectData;
         if (!id || id === pId) {
             message.error('选择一篇文章呦');
             return;
         }
+
+        let newData = {
+            id,
+            value,
+            date: +new Date()
+        };
+
+        try {
+            await this.api.post("/api/message", newData)
+        } catch (e) {
+            message.error(e.toString());
+        }
+
+        this.setState({ spinning: false });
+
         dbUtil.queryData().then((data) => {
             let currentData = _.find(data, ['id', id]);
+
             if (currentData) {
-                currentData.value = value;
-                dbUtil.updateData({
-                    id, // 表格id
-                    value,
-                    date: +new Date()
-                }).then(() => {
+                dbUtil.updateData(newData).then(() => {
                     message.success('保存成功');
                     this.editNode.setState({ preview: true});
                 });
             } else {
-                dbUtil.insertData({
-                    id, // 表格id
-                    value,
-                    date: +new Date()
-                }).then(() => {
+                dbUtil.insertData(newData).then(() => {
                     message.success('保存成功');
                     this.editNode.setState({ preview: true});
                 });
@@ -109,14 +142,8 @@ export default class Main extends React.Component {
     };
 
     produceJson = () => {
-        const { id, pId } = this.state.selectData;
-        if (!id || id === pId) {
-            message.error('选择一篇文章呦');
-            return;
-        }
         dbUtil.queryData().then((data) => {
-            let currentData = _.find(data, ['id', id]);
-            let file = new File([JSON.stringify(currentData)], `read-${id}.json`, {type: "text/plain;charset=utf-8"});
+            let file = new File([JSON.stringify(data)], `read.json`, {type: "text/plain;charset=utf-8"});
 
             saveAs(file);
         });
@@ -130,22 +157,41 @@ export default class Main extends React.Component {
     };
 
     render() {
-        const { value, selectData, expand } = this.state;
+        const { value, selectData, expand, spinning } = this.state;
 
-        return <Row className={styles.root}>
-            <Col span={expand ? 3 : 1}>
-                <Tree treeData={readList} rightable onOpen={this.handleOpen} onSelect={this.handleSelect}/>
-                {
-                    expand ? <span className='expand' onClick={this.handleShrink}>&lt;</span> : <span className='expand' onClick={this.handleExpand}>&gt;</span>
-                }
-            </Col>
-            <Col span={expand ? 11 : 13}>
-                { this.renderIframe(selectData) }
-            </Col>
-            <Col span={10}>
-                <Editor value={value} ref={(node) => { this.editNode = node; }} className="editor" preview onSave={this.handleSave} onChange={this.handleChange}/>
-                <Button className="button" type='primary' onClick={this.produceJson}>生成JSON</Button>
-            </Col>
-        </Row>;
+        return (
+            <Spin spinning={spinning}>
+                <Row className={styles.root}>
+                    <Col span={expand ? 3 : 1}>
+                        <Tree treeData={readList} rightable onOpen={this.handleOpen} onSelect={this.handleSelect}/>
+                        {
+                            expand ? <span className='expand' onClick={this.handleShrink}>&lt;</span> : <span className='expand' onClick={this.handleExpand}>&gt;</span>
+                        }
+                    </Col>
+                    <Col span={expand ? 11 : 13}>
+                        { this.renderIframe(selectData) }
+                    </Col>
+                    <Col span={10}>
+                        <Editor value={value} ref={(node) => { this.editNode = node; }} className="editor" preview onSave={this.handleSave} onChange={this.handleChange}/>
+                        <Dropdown
+                            overlay={
+                                <Menu>
+                                    <Menu.Item key="1" disabled onClick={this.handleSaveAll}>
+                                        全部保存
+                                    </Menu.Item>
+                                    <Menu.Item
+                                        key="2"
+                                        onClick={this.produceJson}
+                                    >
+                                        生成JSON
+                                    </Menu.Item>
+                                </Menu>
+                            }>
+                            <Button className="button" type='primary'>操作</Button>
+                        </Dropdown>
+                    </Col>
+                </Row>
+            </Spin>
+        );
     }
 }
