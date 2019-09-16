@@ -42,6 +42,7 @@ const list = [{
         "id": "3-2",
         "name": "diff算法",
         "pId": "3",
+        "contextMenuKeys": ["open"],
         "link": "https://www.jianshu.com/p/398e63dc1969"
     }]
 }, {
