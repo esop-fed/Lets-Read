@@ -38,6 +38,12 @@ const list = [{
         "pId": "3",
         "contextMenuKeys": ["open"],
         "link": "https://juejin.im/post/5d76f469f265da039a28aff7"
+    },{
+        "id": "3-2",
+        "name": "diff算法",
+        "pId": "3",
+        "contextMenuKeys": ["open"],
+        "link": "https://www.jianshu.com/p/398e63dc1969"
     }]
 }, {
     "id": "4",
