@@ -35,6 +35,18 @@
             box-shadow: 0 0 4px #9da5ab;
             position: relative;
         }
+        .ant-empty {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translate(40%)
+        }
+        .ant-empty-image {
+            display: block;
+            height: auto;
+            margin: 0 5px -5px 0;
+        }
     }
 }
 :global {
