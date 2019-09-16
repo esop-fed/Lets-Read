@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, message, Button, Spin, Dropdown, Menu } from 'antd';
+import { Row, Col, message, Button, Spin, Dropdown, Menu, Empty, Icon } from 'antd';
 import _ from 'lodash';
 
 import Editor from 'for-editor';
@@ -71,7 +71,7 @@ export default class Main extends React.Component {
 
     renderIframe = (data) => {
         const { link } = data;
-        if (!link) return null;
+        if (!link) return <Empty image={<Icon type="smile" theme="twoTone" />} description='请选择一篇文章'/>;
 
         return <iframe src={link} width='100%' height='100%'/>;
     };
@@ -158,6 +158,7 @@ export default class Main extends React.Component {
 
     render() {
         const { value, selectData, expand, spinning } = this.state;
+        const { link } = selectData;
 
         return (
             <Spin spinning={spinning}>
@@ -172,23 +173,27 @@ export default class Main extends React.Component {
                         { this.renderIframe(selectData) }
                     </Col>
                     <Col span={10}>
-                        <Editor value={value} ref={(node) => { this.editNode = node; }} className="editor" preview onSave={this.handleSave} onChange={this.handleChange}/>
-                        <Dropdown
-                            overlay={
-                                <Menu>
-                                    <Menu.Item key="1" disabled onClick={this.handleSaveAll}>
-                                        全部保存
-                                    </Menu.Item>
-                                    <Menu.Item
-                                        key="2"
-                                        onClick={this.produceJson}
-                                    >
-                                        生成JSON
-                                    </Menu.Item>
-                                </Menu>
-                            }>
-                            <Button className="button" type='primary'>操作</Button>
-                        </Dropdown>
+                        {
+                            !link ? null : <React.Fragment>
+                                <Editor value={value} ref={(node) => { this.editNode = node; }} className="editor" preview onSave={this.handleSave} onChange={this.handleChange}/>
+                                <Dropdown
+                                    overlay={
+                                        <Menu>
+                                            <Menu.Item key="1" disabled onClick={this.handleSaveAll}>
+                                                全部保存
+                                            </Menu.Item>
+                                            <Menu.Item
+                                                key="2"
+                                                onClick={this.produceJson}
+                                            >
+                                                生成JSON
+                                            </Menu.Item>
+                                        </Menu>
+                                    }>
+                                    <Button className="button" type='primary'>操作</Button>
+                                </Dropdown>
+                            </React.Fragment>
+                        }
                     </Col>
                 </Row>
             </Spin>
