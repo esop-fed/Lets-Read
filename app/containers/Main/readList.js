@@ -14,7 +14,14 @@ const list = [{
     "id": "1",
     "name": "js",
     "disabledContext": true,
-    "pId": "1"
+    "pId": "1",
+    children: [{
+        "id": "1-1",
+        "name": "react-router「前端进阶」彻底弄懂前端路由",
+        "pId": "1",
+        "contextMenuKeys": ["open"],
+        "link": "https://juejin.im/post/5d2d19ccf265da1b7f29b05f"
+    }]
 }, {
     "id": "2",
     "name": "css",
