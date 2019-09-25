@@ -1,22 +1,32 @@
 import React from 'react';
-import { Row, Col, message, Button, Spin, Dropdown, Menu, Empty, Icon } from 'antd';
-import _ from 'lodash';
+import { Row, Col, Spin, Empty, Icon } from 'antd';
 
 import Editor from 'for-editor';
-import { saveAs } from 'file-saver';
-import { IndexedDB , msgCenter, API } from 'utils';
 import { Tree } from 'components';
 import { readList } from './readList';
 
 import styles from './index.scss';
 
-const { wrapperTableName } = IndexedDB;
-
-const T_CUSTOM_TABLE = "read_table"; // test 表
-const dbUtil = wrapperTableName(T_CUSTOM_TABLE);
+const toolbar = {
+    h1: false, // h1
+    h2: false, // h2
+    h3: false, // h3
+    h4: false, // h4
+    img: false, // 图片
+    link: false, // 链接
+    code: false, // 代码块
+    preview: false, // 预览
+    expand: true, // 全屏
+    /* v0.0.9 */
+    undo: false, // 撤销
+    redo: false, // 重做
+    save: false, // 保存
+    /* v0.2.3 */
+    subfield: false, // 单双栏模式
+};
 
 export default class Main extends React.Component {
-    api = new API('auth');
+    // api = new API('auth');
     state = {
         value: '',
         selectData : {},
@@ -30,42 +40,9 @@ export default class Main extends React.Component {
         });
     };
 
-    componentDidMount = () => {
-        msgCenter.subscribe('initialDbSuccess', () => {
-            dbUtil.queryData().then( (data) => {
-                this.api.get('/api/message')
-                    .then((res) => {
-                        if (res.data) {
-                            for (let id in res.data) {
-                                let currentData = _.find(data, ['id', id]);
-                                if (_.isObject(res.data[id])) {
-                                    if (currentData) {
-                                        if (currentData.date < res.data[id].date) {   // json日期大于本地存储日期更新
-                                            dbUtil.updateData(res.data[id])
-                                        }
-                                    } else {
-                                        dbUtil.insertData(res.data[id]);
-                                    }
-                                }
-                            }
-                        }
-                    });
-            });
-        });
-    };
-
-    componentWillUnmount() {
-        msgCenter.unsubscribe('initialDbSuccess')
-    }
-
     handleSelect = (selectData) => {
         this.setState({
             selectData
-        });
-        dbUtil.queryData().then((data) => {
-            let currentData = _.find(data, ['id', selectData.id]);
-            if (currentData) this.setState({ value: currentData.value });
-            else this.setState({ value: '' });
         });
     };
 
@@ -81,73 +58,73 @@ export default class Main extends React.Component {
         if (link) window.open(link);
     };
 
-    handleSaveAll = () => {
-        this.setState({ spinning: true });
+    // handleSaveAll = () => {
+    //     this.setState({ spinning: true });
+    //
+    //     dbUtil.queryData().then(async (data) => {
+    //         const allData = {};
+    //         data && data.forEach((item) => {
+    //             allData[item.id] = item;
+    //         });
+    //
+    //         try {
+    //             await this.api.post("/api/message", allData)
+    //         } catch (e) {
+    //             message.error(e.toString());
+    //         }
+    //
+    //         message.success("保存成功");
+    //         this.setState({ spinning: false });
+    //
+    //     })
+    // };
 
-        dbUtil.queryData().then(async (data) => {
-            const allData = {};
-            data && data.forEach((item) => {
-                allData[item.id] = item;
-            });
+    // handleSave = async (value) => {
+    //     this.setState({ spinning: true });
+    //     const { id, pId } = this.state.selectData;
+    //     if (!id || id === pId) {
+    //         message.error('选择一篇文章呦');
+    //         return;
+    //     }
+    //
+    //     let newData = {
+    //         id,
+    //         value,
+    //         date: +new Date()
+    //     };
+    //
+    //     try {
+    //         await this.api.post("/api/message", { [id]: newData });
+    //     } catch (e) {
+    //         message.error(e.toString());
+    //     }
+    //
+    //     this.setState({ spinning: false });
+    //
+    //     dbUtil.queryData().then((data) => {
+    //         let currentData = _.find(data, ['id', id]);
+    //
+    //         if (currentData) {
+    //             dbUtil.updateData(newData).then(() => {
+    //                 message.success('保存成功');
+    //                 this.editNode.setState({ preview: true});
+    //             });
+    //         } else {
+    //             dbUtil.insertData(newData).then(() => {
+    //                 message.success('保存成功');
+    //                 this.editNode.setState({ preview: true});
+    //             });
+    //         }
+    //     });
+    // };
 
-            try {
-                await this.api.post("/api/message", allData)
-            } catch (e) {
-                message.error(e.toString());
-            }
-
-            message.success("保存成功");
-            this.setState({ spinning: false });
-
-        })
-    };
-
-    handleSave = async (value) => {
-        this.setState({ spinning: true });
-        const { id, pId } = this.state.selectData;
-        if (!id || id === pId) {
-            message.error('选择一篇文章呦');
-            return;
-        }
-
-        let newData = {
-            id,
-            value,
-            date: +new Date()
-        };
-
-        try {
-            await this.api.post("/api/message", { [id]: newData });
-        } catch (e) {
-            message.error(e.toString());
-        }
-
-        this.setState({ spinning: false });
-
-        dbUtil.queryData().then((data) => {
-            let currentData = _.find(data, ['id', id]);
-
-            if (currentData) {
-                dbUtil.updateData(newData).then(() => {
-                    message.success('保存成功');
-                    this.editNode.setState({ preview: true});
-                });
-            } else {
-                dbUtil.insertData(newData).then(() => {
-                    message.success('保存成功');
-                    this.editNode.setState({ preview: true});
-                });
-            }
-        });
-    };
-
-    produceJson = () => {
-        dbUtil.queryData().then((data) => {
-            let file = new File([JSON.stringify(data)], `read.json`, {type: "text/plain;charset=utf-8"});
-
-            saveAs(file);
-        });
-    };
+    // produceJson = () => {
+    //     dbUtil.queryData().then((data) => {
+    //         let file = new File([JSON.stringify(data)], `read.json`, {type: "text/plain;charset=utf-8"});
+    //
+    //         saveAs(file);
+    //     });
+    // };
 
     handleShrink = () => {
         this.setState({ expand: false });
@@ -157,8 +134,8 @@ export default class Main extends React.Component {
     };
 
     render() {
-        const { value, selectData, expand, spinning } = this.state;
-        const { link } = selectData;
+        const { selectData, expand, spinning } = this.state;
+        const { link, md } = selectData;
 
         return (
             <Spin spinning={spinning}>
@@ -174,25 +151,7 @@ export default class Main extends React.Component {
                     </Col>
                     <Col span={10}>
                         {
-                            !link ? null : <React.Fragment>
-                                <Editor value={value} ref={(node) => { this.editNode = node; }} className="editor" preview onSave={this.handleSave} onChange={this.handleChange}/>
-                                <Dropdown
-                                    overlay={
-                                        <Menu>
-                                            <Menu.Item key="1" disabled onClick={this.handleSaveAll}>
-                                                全部保存
-                                            </Menu.Item>
-                                            <Menu.Item
-                                                key="2"
-                                                onClick={this.produceJson}
-                                            >
-                                                生成JSON
-                                            </Menu.Item>
-                                        </Menu>
-                                    }>
-                                    <Button className="button" type='primary'>操作</Button>
-                                </Dropdown>
-                            </React.Fragment>
+                            !link ? null : <Editor preview toolbar={toolbar} value={require(`containers/markdownList/${md}`).default} className="editor"/>
                         }
                     </Col>
                 </Row>

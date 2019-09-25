@@ -8,6 +8,10 @@ git clone git@github.com:esop-fed/Lets-Read.git
 cnpm i
 npm start
 ```
+然后打开http://localhost:8888
+
+### Preview
+https://esop-fed.github.io/Lets-Read
 
 ```bash
 npm run dist
@@ -15,7 +19,3 @@ git add .
 git commit -m "fix: xxx"
 git pull origin master
 ```
-
-然后打开http://localhost:8888
-
-https://esop-fed.github.io/Lets-Read
