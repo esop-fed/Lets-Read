@@ -20,7 +20,8 @@ const list = [{
         "name": "react-router「前端进阶」彻底弄懂前端路由",
         "pId": "1",
         "contextMenuKeys": ["open"],
-        "link": "https://juejin.im/post/5d2d19ccf265da1b7f29b05f"
+        "link": "https://juejin.im/post/5d2d19ccf265da1b7f29b05f",
+        "md": "read-1-1.md"       // TODO md文件名以read-{id}.md为准,文件统一放在 markdownList 目录下
     }]
 }, {
     "id": "2",
@@ -32,7 +33,8 @@ const list = [{
         "name": "CSS 变量教程",
         "pId": "2",
         "contextMenuKeys": ["open"],
-        "link": "https://www.ruanyifeng.com/blog/2017/05/css-variables.html"
+        "link": "https://www.ruanyifeng.com/blog/2017/05/css-variables.html",
+        "md": "read-2-1.md"
     }]
 }, {
     "id": "3",
@@ -44,13 +46,15 @@ const list = [{
         "name": "「中高级前端」高性能渲染十万条数据",
         "pId": "3",
         "contextMenuKeys": ["open"],
-        "link": "https://juejin.im/post/5d76f469f265da039a28aff7"
+        "link": "https://juejin.im/post/5d76f469f265da039a28aff7",
+        "md": "read-3-1.md"
     },{
         "id": "3-2",
         "name": "diff算法",
         "pId": "3",
         "contextMenuKeys": ["open"],
-        "link": "https://www.jianshu.com/p/398e63dc1969"
+        "link": "https://www.jianshu.com/p/398e63dc1969",
+        "md": "read-3-2.md"
     }]
 }, {
     "id": "4",
@@ -62,7 +66,8 @@ const list = [{
         "name": "函数组合",
         "pId": "4",
         "contextMenuKeys": ["open"],
-        "link": "https://juejin.im/post/5d50bfebf265da03cb122b6f"
+        "link": "https://juejin.im/post/5d50bfebf265da03cb122b6f",
+        "md": "read-4-1.md"
     }]
 }, {
     "id": "5",

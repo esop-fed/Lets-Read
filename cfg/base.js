@@ -3,6 +3,10 @@ const path = require('path');
 const webpack = require('webpack');
 const chalk = require('chalk');
 
+const marked = require("marked");
+const highlight = require('highlight.js');
+const renderer = new marked.Renderer();
+
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -43,6 +47,28 @@ const baseConfig = {
                 test: /\.tsx?$/,
                 include: srcPath,
                 loader: "bundle-loader?lazy!ts-loader"
+            }, {
+                test: /\.md$/,
+                use: [
+                    {
+                        loader: "raw-loader"
+                    },
+                    {
+                        loader: "markdown-loader",
+                        options: {
+                            renderer,
+                            highlight: code => highlight.highlightAuto(code).value,
+                            pedantic: false,
+                            gfm: true,
+                            tables: true,
+                            breaks: false,
+                            sanitize: false,
+                            smartLists: true,
+                            smartypants: false,
+                            xhtml: false
+                        }
+                    }
+                ]
             },
             {
                 test: /\.html/,

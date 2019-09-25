@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import { LocaleProvider } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
-import { IndexedDB, msgCenter } from 'utils';
 
 import { useStrict } from 'mobx';
 import { AppContainer } from 'react-hot-loader';
@@ -24,11 +23,11 @@ require("styles/index.scss"); // 引入框架样式文件
 
 useStrict(true); // 强制所有对mobx-store的更改都得通过action
 
-IndexedDB.initIndexedDB(() => {
-    setTimeout(() => {
-        msgCenter.publish('initialDbSuccess', true)
-    }, 300)
-});
+// IndexedDB.initIndexedDB(() => {
+//     setTimeout(() => {
+//         msgCenter.publish('initialDbSuccess', true)
+//     }, 300)
+// });
 
 const render = (Component) => {
     ReactDOM.render((
@@ -52,6 +51,7 @@ if (module.hot) {
         const NextRootContainer = require("./Router").default;
         render(NextRootContainer);
     });
+
     // TODO This is a react-router bug when work with react-hot-loader
     // override the console.error, and filter the warning out.
     // It's only included when HMR is enabled.
